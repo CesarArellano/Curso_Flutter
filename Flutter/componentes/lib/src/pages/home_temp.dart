@@ -15,6 +15,7 @@ class HomePageTemp extends StatelessWidget {
     );
   }
 
+  /*
   List<Widget> _crearItems() {
     List<Widget> lista = new List<Widget>(); // Lista dinámica de Widgets.
 
@@ -27,7 +28,7 @@ class HomePageTemp extends StatelessWidget {
 
     return lista;
   }
-
+  */
   List<Widget> _crearItemsCorta() {
     var widgets = opciones.map((item) {
       return Column(

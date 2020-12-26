@@ -9,7 +9,13 @@ class CardPage extends StatelessWidget {
       ),
       body: ListView(
         padding: EdgeInsets.all(10.0),
-        children: <Widget>[_cardTipo1()],
+        children: <Widget>[
+          _cardTipo1(),
+          SizedBox(
+            height: 10.0,
+          ),
+          _cardTipo2(),
+        ],
       ),
     );
   }
@@ -34,5 +40,25 @@ class CardPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _cardTipo2() {
+    return Card(
+        child: Column(
+      children: <Widget>[
+        FadeInImage(
+          image: NetworkImage(
+              'https://www.solofondos.com/wp-content/uploads/2016/04/mountain-landscape-wallpaper.jpg'),
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          fadeInDuration: Duration(milliseconds: 100),
+          height: 300.0,
+          fit: BoxFit.cover,
+        ),
+        Container(
+          padding: EdgeInsets.all(10.0),
+          child: Text('Descripción de la imagen'),
+        ),
+      ],
+    ));
   }
 }

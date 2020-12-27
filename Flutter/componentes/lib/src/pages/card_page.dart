@@ -54,16 +54,23 @@ class CardPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.photo_album, color: Colors.blue),
-            title: Text('Soy el título de esto'),
+            leading: Icon(
+              Icons.photo_album,
+              color: Colors.blue,
+              size: 40.0,
+            ),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[SizedBox(height: 12.0), Text("Título")],
+            ),
             subtitle: Text(
                 'Aquí estamos con la descripción de la tarjeta que quiero que ustedes vean para tener una idea de lo que quiero mostrarles.'),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              FlatButton(child: Text('Ok'), onPressed: () {}),
               FlatButton(child: Text('Cancelar'), onPressed: () {}),
+              FlatButton(child: Text('Ok'), onPressed: () {}),
             ],
           )
         ],

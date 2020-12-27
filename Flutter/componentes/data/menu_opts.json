@@ -4,7 +4,7 @@
         {
             "ruta" : "alert",
             "icon" : "add_alert",
-            "texto": "Alertas"
+            "texto": "Alerts"
         },
         {
             "ruta" : "avatar",
@@ -14,7 +14,7 @@
         {
             "ruta" : "card",
             "icon" : "folder_open",
-            "texto": "Cards - Tarjetas"
+            "texto": "Cards"
         },
         {
             "ruta" : "animatedContainer",
@@ -34,7 +34,7 @@
         {
             "ruta" : "list",
             "icon" : "list",
-            "texto": "Listas y Scroll"
+            "texto": "Lists, InfiniteScroll, Pull on refresh"
         }
     ]
 }

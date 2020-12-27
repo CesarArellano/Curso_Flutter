@@ -9,6 +9,7 @@ class _InputPageState extends State<InputPage> {
   String _nombre = '';
   String _email = '';
   String _fecha = '';
+
   String _opcionSeleccionada = 'Volar';
 
   List<String> _poderes = ['Volar', 'Rayos X', 'Súper Aliento', 'Súper Fuerza'];
@@ -90,11 +91,7 @@ class _InputPageState extends State<InputPage> {
         suffixIcon: Icon(Icons.lock_open),
         icon: Icon(Icons.lock),
       ),
-      onChanged: (valor) {
-        setState(() {
-          _email = valor;
-        });
-      },
+      onChanged: null,
     );
   }
 
@@ -150,6 +147,7 @@ class _InputPageState extends State<InputPage> {
         SizedBox(width: 20.0),
         Expanded(
           child: DropdownButton(
+            isExpanded: true,
             value: _opcionSeleccionada,
             items: getOpcionesDropdown(),
             onChanged: (opt) {

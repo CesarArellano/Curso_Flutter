@@ -50,18 +50,22 @@ class _ListaPageState extends State<ListaPage> {
 
   Widget _crearLista() {
     //Elementos de lista indefinidos / ilimitados, serán renderizados en tiempo real.
-    return ListView.builder(
-      controller: _scrollController,
-      itemCount: _listaNumeros.length,
-      itemBuilder: (BuildContext context, int index) {
-        final imagen = _listaNumeros[index];
-        return FadeInImage(
-          image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
-          placeholder: AssetImage('assets/jar-loading.gif'),
-          height: 300,
-          fit: BoxFit.cover,
-        );
-      },
+    return RefreshIndicator(
+      onRefresh: obtenerPaginaUno,
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: _listaNumeros.length,
+        itemBuilder: (BuildContext context, int index) {
+          final imagen = _listaNumeros[index];
+          //Pendiente: Corregir Bug Flutter NetwotkImage statusCode: 404
+          return FadeInImage(
+            image: NetworkImage('https://picsum.photos/500/300/?image=$imagen'),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            height: 300,
+            fit: BoxFit.cover,
+          );
+        },
+      ),
     );
   }
 
@@ -76,7 +80,7 @@ class _ListaPageState extends State<ListaPage> {
   Future fetchData() async {
     _isLoading = true;
     setState(() {});
-    final duration = new Duration(seconds: 2);
+    final duration = new Duration(seconds: 1);
     new Timer(duration, respuestaHTTP);
   }
 
@@ -111,5 +115,15 @@ class _ListaPageState extends State<ListaPage> {
     } else {
       return Container();
     }
+  }
+
+  Future<void> obtenerPaginaUno() async {
+    final duration = new Duration(seconds: 2);
+    new Timer(duration, () {
+      _listaNumeros.clear();
+      _ultimoItem++;
+      _agregarDiez();
+    });
+    return Future.delayed(duration);
   }
 }

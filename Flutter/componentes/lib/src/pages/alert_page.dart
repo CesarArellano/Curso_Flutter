@@ -8,16 +8,22 @@ class AlertPage extends StatelessWidget {
         title: Text('Alert Page'),
       ),
       body: Center(
-        child: RaisedButton(
-          child: Text("Mensaje alerta"),
-          textColor: Colors.white,
-          color: Colors.blue,
-          onPressed: () => _mostrarAlert(context),
-          shape: StadiumBorder(),
+        child: Container(
+          width: 200.0,
+          height: 50.0,
+          child: RaisedButton(
+            hoverElevation: 5.0,
+            child: Text("Mensaje alerta", style: TextStyle(fontSize: 20.0)),
+            textColor: Colors.white,
+            color: Colors.blue,
+            onPressed: () => _mostrarAlert(context),
+            shape: StadiumBorder(),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add_location),
+        backgroundColor: Colors.red,
+        child: Icon(Icons.close),
         onPressed: () {
           Navigator.pop(context);
         },

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import 'package:peliculas/src/models/actores_model.dart';
+
 import 'package:peliculas/src/models/peliculas_model.dart';
+import 'package:peliculas/src/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
-  const PeliculaDetalle({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
@@ -20,7 +21,11 @@ class PeliculaDetalle extends StatelessWidget {
                 [
                   SizedBox(height: 10.0),
                   _posterTitulo(context, pelicula),
+                  SizedBox(height: 5.0),
                   _descripcion(pelicula),
+                  _descripcion(pelicula),
+                  _descripcion(pelicula),
+                  _crearCasting(pelicula),
                 ],
               ),
             ),
@@ -57,11 +62,14 @@ class PeliculaDetalle extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(
           children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image(
-                image: NetworkImage(pelicula.getPosterImg()),
-                height: 150.0,
+            Hero(
+              tag: pelicula.id,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Image(
+                  image: NetworkImage(pelicula.getPosterImg()),
+                  height: 150.0,
+                ),
               ),
             ),
             SizedBox(width: 20.0),
@@ -92,11 +100,67 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _descripcion(Pelicula pelicula) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Text(
         pelicula.overview,
         textAlign: TextAlign.justify,
       ),
     );
+  }
+
+  Widget _crearCasting(Pelicula pelicula) {
+    final peliProvider = new PelicularProvider();
+
+    return FutureBuilder(
+      future: peliProvider.getCast(pelicula.id.toString()),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return _crearActoresPageView(snapshot.data);
+        } else {
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blue,
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _crearActoresPageView(List<Actor> actores) {
+    return SizedBox(
+      height: 200.0,
+      child: PageView.builder(
+        pageSnapping: false,
+        controller: PageController(
+          viewportFraction: 0.3,
+          initialPage: 1,
+        ),
+        itemCount: actores.length,
+        itemBuilder: (BuildContext context, int index) {
+          return _actorTarjeta(actores[index]);
+        },
+      ),
+    );
+  }
+
+  Widget _actorTarjeta(Actor actor) {
+    return Container(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: FadeInImage(
+            image: NetworkImage(actor.getFoto()),
+            placeholder: AssetImage('assets/img/no-image.jpg'),
+            height: 150.0,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Text(actor.name, overflow: TextOverflow.ellipsis),
+      ],
+    ));
   }
 }

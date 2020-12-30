@@ -45,7 +45,7 @@ class Actor {
 
   getFoto() {
     if (profilePath == null) {
-      return 'https://www.animeomega.es/foro/styles/canvas/theme/images/no_avatar.jpg';
+      return 'https://mpw.bangsamoro.gov.ph/wp-content/uploads/2019/04/Noavatar.png';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$profilePath';
     }

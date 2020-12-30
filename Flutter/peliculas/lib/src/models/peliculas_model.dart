@@ -65,15 +65,15 @@ class Pelicula {
   }
   getPosterImg() {
     if (posterPath == null) {
-      return 'https://lh3.googleusercontent.com/proxy/KWdNklUt2IHDhW2wii67Sz_RXO5M8J3F_z11hDjdRphlQpBtDtu_V1yXR2JdH8-UzyuvvIiuqEpgQ5DyNh6GhGUfFBl_wX8ITZOUg-vDXG8cIHnPRi9HSzZacsfKtwxVEwjK7mUKP2Zg2vk-4tm-5QUS9Ls59ddwpsXDj0pUsA781ZbBshxm782CUJEDwcwl5A1rX0HLU4k3uyzRNNS_iDQqmk0qyJQ13Ym7b2dSOS5c1LBCRDsWmSw1Rzh5NpkBRJMMrJugegnN7UCaX5kaLY4eLOAGX_pl3fdLzXBo0HYslPSRcEeBXXnnYnzNetalqkrH7rIwhTut52_QyNy4ym-039dJSex1mYUssFNrUO_efeKAGBDSA12shh5DjMK-mgyoMrqi5wpaAWg00-Mdm3E7WCrzOQHd-37zA006EskrC1M1HM3VH2efbaq-POlrn6W1x3qYRHrS-OWY1dwC1wHeL0Vxu3uDXDpsgxeOd__JZvwHiy_U-VP7_X18WewXUjzFITrVsPSAtnuIqajGkXLUuUbd_3w7EKWGzsEyFiVUJzsdZlMXklEpnTaQmPFxIu-FdeY';
+      return 'https://sciences.ucf.edu/puerto-rico-hub/wp-content/uploads/sites/218/2020/04/No-Image-Available.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
   }
 
   getBackgroundImg() {
-    if (posterPath == null) {
-      return 'https://lh3.googleusercontent.com/proxy/KWdNklUt2IHDhW2wii67Sz_RXO5M8J3F_z11hDjdRphlQpBtDtu_V1yXR2JdH8-UzyuvvIiuqEpgQ5DyNh6GhGUfFBl_wX8ITZOUg-vDXG8cIHnPRi9HSzZacsfKtwxVEwjK7mUKP2Zg2vk-4tm-5QUS9Ls59ddwpsXDj0pUsA781ZbBshxm782CUJEDwcwl5A1rX0HLU4k3uyzRNNS_iDQqmk0qyJQ13Ym7b2dSOS5c1LBCRDsWmSw1Rzh5NpkBRJMMrJugegnN7UCaX5kaLY4eLOAGX_pl3fdLzXBo0HYslPSRcEeBXXnnYnzNetalqkrH7rIwhTut52_QyNy4ym-039dJSex1mYUssFNrUO_efeKAGBDSA12shh5DjMK-mgyoMrqi5wpaAWg00-Mdm3E7WCrzOQHd-37zA006EskrC1M1HM3VH2efbaq-POlrn6W1x3qYRHrS-OWY1dwC1wHeL0Vxu3uDXDpsgxeOd__JZvwHiy_U-VP7_X18WewXUjzFITrVsPSAtnuIqajGkXLUuUbd_3w7EKWGzsEyFiVUJzsdZlMXklEpnTaQmPFxIu-FdeY';
+    if (backdropPath == null) {
+      return 'https://sciences.ucf.edu/puerto-rico-hub/wp-content/uploads/sites/218/2020/04/No-Image-Available.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }

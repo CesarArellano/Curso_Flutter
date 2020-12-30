@@ -35,7 +35,7 @@ class MovieHorizontal extends StatelessWidget {
   }
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    return Container(
+    final peliculaTarjeta = Container(
       child: Column(
         children: <Widget>[
           ClipRRect(
@@ -56,5 +56,11 @@ class MovieHorizontal extends StatelessWidget {
         ],
       ),
     );
+    return GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, 'detalle',
+              arguments: pelicula); // Mandar a la otra pantala
+        },
+        child: peliculaTarjeta);
   }
 }

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:peliculas/src/models/peliculas_model.dart';
 import 'package:peliculas/src/models/actores_model.dart';
 
-class PelicularProvider {
+class PeliculasProvider {
   String _apikey = '62e55e873b3d4db86782226591ef48ae';
   String _url = 'api.themoviedb.org';
   String _language = 'es-ES';
@@ -76,5 +76,12 @@ class PelicularProvider {
     final decodedData = json.decode(resp.body);
     final cast = new Cast.fromJsonList(decodedData['cast']);
     return cast.actores;
+  }
+
+  Future<List<Pelicula>> buscarPelicula(String query) async {
+    final url = Uri.https(_url, '3/search/movie',
+        {'api_key': _apikey, 'language': _language, 'query': query});
+
+    return _procesarRespuesta(url);
   }
 }

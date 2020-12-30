@@ -6,7 +6,7 @@ import 'package:peliculas/src/widgetsPersonalizados/card_swiper_widget.dart';
 import 'package:peliculas/src/widgetsPersonalizados/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
-  final peliculasProvider = new PelicularProvider();
+  final peliculasProvider = new PeliculasProvider();
 
   @override
   Widget build(BuildContext context) {

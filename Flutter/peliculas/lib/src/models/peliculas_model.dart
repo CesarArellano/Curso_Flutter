@@ -14,6 +14,7 @@ class Peliculas {
 }
 
 class Pelicula {
+  String uniqueId; // Solución Hero Animation
   bool adult;
   String backdropPath;
   List<int> genreIds;

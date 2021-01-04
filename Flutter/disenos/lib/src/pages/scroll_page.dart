@@ -25,8 +25,11 @@ class ScrollPage extends StatelessWidget {
   }
 
   Widget _paginaDos() {
-    return Center(
-      child: Text('Página 2'),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      color: Color.fromRGBO(108, 192, 218, 1.0),
+      child: _buttonCenter(),
     );
   }
 
@@ -63,6 +66,22 @@ class ScrollPage extends StatelessWidget {
           Expanded(child: Container()),
           Icon(Icons.keyboard_arrow_down, size: 70.0, color: Colors.white)
         ],
+      ),
+    );
+  }
+
+  Widget _buttonCenter() {
+    return Center(
+      child: RaisedButton(
+        hoverElevation: 5.0,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+          child: Text("Bienvenidos", style: TextStyle(fontSize: 20.0)),
+        ),
+        textColor: Colors.white,
+        color: Colors.blue,
+        onPressed: () {},
+        shape: StadiumBorder(),
       ),
     );
   }

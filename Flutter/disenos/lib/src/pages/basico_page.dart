@@ -12,9 +12,9 @@ class BasicoPage extends StatelessWidget {
         children: <Widget>[
           _crearImagen(),
           _crearTitulo(),
-          SizedBox(height: 10.0),
+          SizedBox(height: 5.0),
           _crearAcciones(),
-          SizedBox(height: 10.0),
+          SizedBox(height: 15.0),
           _crearTexto(),
           _crearTexto(),
           _crearTexto(),

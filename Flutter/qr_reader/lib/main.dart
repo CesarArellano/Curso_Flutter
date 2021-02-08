@@ -15,7 +15,13 @@ class MyApp extends StatelessWidget {
       routes: {
         'home': (_) => HomePage(), // guión bajo para indicar que no se usa BuildContext
         'mapa': (_) => MapaPage()
-      }
+      },
+      theme: ThemeData(
+        primaryColor: Colors.deepPurple,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.deepPurple
+        )
+      )
     );
   }
 }

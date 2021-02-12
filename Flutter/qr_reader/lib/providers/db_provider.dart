@@ -81,6 +81,16 @@ class DBProvider {
     : [];
   }
 
+  Future<int> updateScan(ScanModel newScan) async {
+    // Verificar la BD
+    final db = await database;
+    // Genera un registro en la BD.
+    final res = await db.update('Scans', newScan.toJson(), where: 'id = ?', whereArgs: [newScan.id]);
+    
+    print(res);
+    return res;
+  }
+
 }
 
 /* Manera complicada de hacer las inserciones.

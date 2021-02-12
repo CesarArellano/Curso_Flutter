@@ -8,11 +8,8 @@ class ScanButton extends StatelessWidget {
     return FloatingActionButton(
       child: Icon(Icons.filter_center_focus),
       onPressed: () async {
-        String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                                                    '#3D8BEF', 
-                                                    'Cancelar', 
-                                                    false, 
-                                                    ScanMode.QR);
+        //String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode('#3D8BEF', 'Cancelar', false, ScanMode.QR);
+        String barcodeScanRes = "https://www.youtube.com";
         print(barcodeScanRes);
       },
     );

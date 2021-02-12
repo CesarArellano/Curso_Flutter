@@ -40,7 +40,7 @@ class _HomePageBody extends StatelessWidget {
     //Cambiar página respectiva.
     final currentIndex = uiProvider.selectedMenuOpt;
     final tempScan = new ScanModel(valor: 'https://google.com');
-    DBProvider.db.newScan(tempScan);
+    DBProvider.db.deleteAllScan();
     
     switch(currentIndex) {
       case 0:

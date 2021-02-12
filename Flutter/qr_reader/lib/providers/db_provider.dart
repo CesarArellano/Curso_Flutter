@@ -48,7 +48,7 @@ class DBProvider {
     final db = await database;
     // Genera un registro en la BD.
     final res = await db.insert('Scans', newScan.toJson());
-    print(res);
+
     return res;
   }
 
@@ -86,8 +86,21 @@ class DBProvider {
     final db = await database;
     // Genera un registro en la BD.
     final res = await db.update('Scans', newScan.toJson(), where: 'id = ?', whereArgs: [newScan.id]);
-    
-    print(res);
+
+    return res;
+  }
+
+  Future<int> deleteScan(int id) async {
+    final db = await database;
+    final res = await db.delete('Scans', where: 'id = ?', whereArgs: [id]);
+    return res;
+  }
+
+  Future<int> deleteAllScan() async {
+    final db = await database;
+    final res = await db.rawDelete('''
+      DELETE FROM Scans
+    ''');
     return res;
   }
 

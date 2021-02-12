@@ -51,6 +51,36 @@ class DBProvider {
     print(res);
     return res;
   }
+
+  Future<ScanModel> getScanById(int id) async {
+    final db = await database;
+    final res = await db.query('Scans', where: 'id = ?', whereArgs: [id]);
+
+    return res.isNotEmpty
+    ? ScanModel.fromJson(res.first) // Obtiene el mapa obtenido del query.
+    : null;
+  }
+
+  Future<List<ScanModel>> getAllScans(int id) async {
+    final db = await database;
+    final res = await db.query('Scans');
+
+    return res.isNotEmpty
+    ? res.map((s) => ScanModel.fromJson(s)).toList() // Obtiene el mapa obtenido del query.
+    : [];
+  }
+
+  Future<List<ScanModel>> getScansByType(int tipo) async {
+    final db = await database;
+    final res = await db.rawQuery(''' 
+      SELECT * FROM Scans WHERE tipo = '$tipo'
+    ''');
+
+    return res.isNotEmpty
+    ? res.map((s) => ScanModel.fromJson(s)).toList() // Obtiene el mapa obtenido del query.
+    : [];
+  }
+
 }
 
 /* Manera complicada de hacer las inserciones.

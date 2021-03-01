@@ -31,7 +31,7 @@ class BotonesPage extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
             begin: FractionalOffset(0.0, 0.6),
-            end: FractionalOffset(0.0, 1.0),
+            end: FractionalOffset(0.0, 1.0),            
             colors: [
               Color.fromRGBO(52, 54, 101, 1.0),
               Color.fromRGBO(35, 37, 57, 1.0),

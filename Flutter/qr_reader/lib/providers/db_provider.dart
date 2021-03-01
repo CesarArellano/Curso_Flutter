@@ -33,7 +33,7 @@ class DBProvider {
       onCreate: (Database db, int version) async {
         await db.execute('''
           CREATE TABLE Scans(
-            id INTEGER PRIMARY_KEY,
+            id INTEGER PRIMARY KEY,
             tipo TEXT,
             valor TEXT
           );
@@ -61,7 +61,7 @@ class DBProvider {
     : null;
   }
 
-  Future<List<ScanModel>> getAllScans(int id) async {
+  Future<List<ScanModel>> getAllScans() async {
     final db = await database;
     final res = await db.query('Scans');
 
@@ -70,15 +70,16 @@ class DBProvider {
     : [];
   }
 
-  Future<List<ScanModel>> getScansByType(int tipo) async {
-    final db = await database;
-    final res = await db.rawQuery(''' 
-      SELECT * FROM Scans WHERE tipo = '$tipo'
+  Future<List<ScanModel>> getScansByType( String tipo ) async {
+
+    final db  = await database;
+    final res = await db.rawQuery('''
+      SELECT * FROM Scans WHERE tipo = '$tipo'    
     ''');
 
     return res.isNotEmpty
-    ? res.map((s) => ScanModel.fromJson(s)).toList() // Obtiene el mapa obtenido del query.
-    : [];
+          ? res.map( (s) => ScanModel.fromJson(s) ).toList()
+          : [];
   }
 
   Future<int> updateScan(ScanModel newScan) async {

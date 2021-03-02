@@ -19,8 +19,7 @@ class ScanButton extends StatelessWidget {
         }
         
         final scanListProvider = Provider.of<ScanListProvider>(context,listen:false);
-        final newScan = await scanListProvider.nuevoScan(barcodeScanRes);
-        launchURL(context, newScan);
+        await scanListProvider.nuevoScan(barcodeScanRes);
       },
     );
   }

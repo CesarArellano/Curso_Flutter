@@ -144,6 +144,7 @@ class BotonesPage extends StatelessWidget {
 
   Widget _crearBotonRedondeado(Color color, IconData icon, String texto) {
     return ClipRect(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
         child: Container(

@@ -12,6 +12,7 @@ class MapaPage extends StatefulWidget {
 class _MapaPageState extends State<MapaPage> {
   Completer<GoogleMapController> _controller = Completer();
   MapType mapType = MapType.normal;
+  bool isMapVisible = true;
   @override
   Widget build(BuildContext context) {
     final ScanModel scan = ModalRoute.of(context).settings.arguments;
@@ -50,13 +51,30 @@ class _MapaPageState extends State<MapaPage> {
           )
         ],
       ),
-      body: GoogleMap(
-        markers: markers,
-        mapType: mapType,
-        initialCameraPosition: puntoInicial,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      body: Stack(
+        children: [
+          GoogleMap(
+            zoomControlsEnabled: false,
+            markers: markers,
+            mapType: mapType,
+            initialCameraPosition: puntoInicial,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+              Timer(Duration(milliseconds: 800), (){ setState(() {isMapVisible = false;  });});
+            },
+          ),
+          Visibility(
+            visible: isMapVisible,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.grey[100],
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.layers),

@@ -17,13 +17,6 @@ void main() {
   activado = !activado;
   print(activado);
   
-  if(activado){
-    print("El motor está funcionando");
-  }
-  else{
-    print("Está apagado");
-  }
-  
   //Listas == Arreglos
   List<int> numeros = [1,2,3,4,5];
   print(numeros);
@@ -31,6 +24,6 @@ void main() {
   print(numeros);
   
   //Listas con tamaño fijo no se puede usar el método add
-  List masNumeros = List(10);
+  List masNumeros = List.generate(10,(value) => value);
   print(masNumeros);
 }

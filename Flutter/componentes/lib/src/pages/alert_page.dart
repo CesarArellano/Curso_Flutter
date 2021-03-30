@@ -11,13 +11,13 @@ class AlertPage extends StatelessWidget {
         child: Container(
           width: 200.0,
           height: 50.0,
-          child: RaisedButton(
-            hoverElevation: 5.0,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              elevation: 5.0,
+              shape: StadiumBorder()
+            ),            
             child: Text("Mensaje alerta", style: TextStyle(fontSize: 20.0)),
-            textColor: Colors.white,
-            color: Colors.blue,
             onPressed: () => _mostrarAlert(context),
-            shape: StadiumBorder(),
           ),
         ),
       ),
@@ -52,11 +52,11 @@ class AlertPage extends StatelessWidget {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text('Cancelar'),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            FlatButton(
+            TextButton(
               child: Text('Ok'),
               onPressed: () => Navigator.of(context).pop(),
             ),

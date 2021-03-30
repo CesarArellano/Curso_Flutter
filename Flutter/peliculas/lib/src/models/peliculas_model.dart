@@ -1,5 +1,5 @@
 class Peliculas {
-  List<Pelicula> items = new List();
+  List<Pelicula> items = [];
 
   Peliculas();
 

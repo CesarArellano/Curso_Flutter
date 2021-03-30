@@ -12,7 +12,7 @@ class PeliculasProvider {
   int _popularesPage = 0;
   bool _cargando = false;
 
-  List<Pelicula> _populares = new List();
+  List<Pelicula> _populares = [];
   //Todos van a escuchar el Stream por el .broadcast
   final _popularesStreamController =
       StreamController<List<Pelicula>>.broadcast();

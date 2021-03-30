@@ -5,12 +5,12 @@ void main (){
   print(text);
   
   // Null coditional
-  String name = "Name isn't null";
+  dynamic name = null;
   //Si es null name tomará el texto "No definido".
-  String result = name ?? "No Definido";
+  String result = name ?? 'No Definido';
   print(result);
-  printText(name??"Es null");
-  printText(name!=null ? name : "Es null");
+  printText(name ?? "Es null");
+  printText(name != null ? name : "Es null");
 }
 
 void printText(String text){

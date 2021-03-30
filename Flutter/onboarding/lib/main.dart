@@ -125,17 +125,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           title: "Another title page",
           body: "Another beautiful body text for this example onboarding",
           image: _buildImage('img2'),
-          footer: RaisedButton(
+          footer: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.lightBlue,
+              shape: StadiumBorder()
+            ),
             onPressed: () {
               introKey.currentState?.animateScroll(0);
             },
             child: const Text(
               'FooButton',
               style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.lightBlue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
             ),
           ),
           decoration: pageDecoration,

@@ -3,7 +3,7 @@ void main (){
   
   Hero name = new Hero("Spiderman");
   // Si es null el objeto, no se llama el método printName.
-  name?.printName();
+  name.printName();
   print("fin");
 }
 

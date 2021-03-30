@@ -72,16 +72,17 @@ class ScrollPage extends StatelessWidget {
 
   Widget _buttonCenter() {
     return Center(
-      child: RaisedButton(
-        hoverElevation: 5.0,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 5.0,
+          primary: Colors.blue,
+          shape: StadiumBorder(),
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
           child: Text("Bienvenidos", style: TextStyle(fontSize: 20.0)),
-        ),
-        textColor: Colors.white,
-        color: Colors.blue,
-        onPressed: () {},
-        shape: StadiumBorder(),
+        ),        
+        onPressed: () {},       
       ),
     );
   }

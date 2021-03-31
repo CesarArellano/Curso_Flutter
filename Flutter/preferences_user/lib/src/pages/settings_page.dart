@@ -11,17 +11,18 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final prefs = new UserPreferences();
-  bool _colorSecundario = false;
+  bool _colorSecundario;
   int _genero;
-  String _nombre = 'Pedro';
 
   TextEditingController _inputNameController;
 
   @override
   void initState() {
     super.initState();
+    prefs.ultimaPagina = SettingsPage.routeName;
     _genero = prefs.genero;
-    _inputNameController = new TextEditingController(text: _nombre);
+    _colorSecundario = prefs.colorSecundario;
+    _inputNameController = new TextEditingController(text: prefs.nombreUsuario);
     setState(() {});
   }
 
@@ -30,20 +31,22 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Ajustes"),
+        backgroundColor: prefs.colorSecundario ? Colors.teal : Colors.blue,
       ),
       drawer: MenuWidget(),
       body: ListView(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10.0),
             child: Text("Settings", style: TextStyle(fontSize: 45.0, fontWeight: FontWeight.bold))
           ),
-          Divider(),
+          Divider(thickness: 1.0),
           SwitchListTile(
             value: _colorSecundario,
             title: Text("Color secundario"),
             onChanged: (value) {              
               setState(() {
+                prefs.colorSecundario = value;
                 _colorSecundario = value;
               });
             }
@@ -69,7 +72,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 labelText: 'Nombre',
                 helperText: 'Nombre de la persona usando el teléfono',
               ),
-              onChanged: (value) {},
+              onChanged: (value) {
+                prefs.nombreUsuario = value;
+              },
 
             ),
           )

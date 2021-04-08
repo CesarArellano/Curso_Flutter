@@ -1,28 +1,28 @@
-void main (){
-  Vehicle myVehicle =  new Vehicle(4,"Blue");
+void main() {
+  Vehicle myVehicle = new Vehicle(4, "Blue");
   print(myVehicle);
-  
-  final Car myCar = Car(4,"Red","891AED","A2323DSA21P");
+
+  final Car myCar = Car(4, "Red", "891AED", "A2323DSA21P");
   print(myCar);
   print("last4DigitsMotor: ${myCar.last4DigitsMotor}");
   print("last4DigitsPlate: ${myCar.last4DigitsPlate}");
-  
-  final Bicycle myBicycle = Bicycle(2,"Yellow",bumper:true);
+
+  final Bicycle myBicycle = Bicycle(2, "Yellow", bumper: true);
   print(myBicycle);
 }
 
-class Vehicle{
+class Vehicle {
   final int tires;
   final String color;
-  
+
   /* Constructor con más líneas de código
     
-   Vehicle(int tires, String color){
+  Vehicle(int tires, String color){
     this.tires = tires;
     this.color = color;
   }
   */
-  
+
   // Constructor simplificado
   Vehicle(this.tires, this.color);
   //Devuelve la cadena
@@ -34,19 +34,21 @@ class Vehicle{
 class Car extends Vehicle {
   //Para definir variables privada sólo se coloca un guión bajo antes del nombre de la variable como se hace con la variable motor.
   final String plate, _motor;
-  
-  String get last4DigitsMotor => _motor.substring(_motor.length-4);
-  
-  String get last4DigitsPlate => plate.substring(plate.length-1);
+
+  String get last4DigitsMotor => _motor.substring(_motor.length - 4);
+
+  String get last4DigitsPlate => plate.substring(plate.length - 1);
   //Con super manda a llamar al constructor de la clase padre.
-  Car(int tires, String color,this.plate,this._motor): super(tires,color);
+  Car(int tires, String color, this.plate, this._motor) : super(tires, color);
   @override
-  String toString() => "Car - tires: $tires, color: $color, plate: $plate, motor: $_motor";
+  String toString() =>
+      "Car - tires: $tires, color: $color, plate: $plate, motor: $_motor";
 }
 
-class Bicycle extends Vehicle{
+class Bicycle extends Vehicle {
   final bool bumper;
-  Bicycle(int tires, String color,{this.bumper = false}) : super(tires, color);
+  Bicycle(int tires, String color, {this.bumper = false}) : super(tires, color);
   @override
-  String toString() => "Bicycle - tires: $tires, color: $color, bumper: $bumper";
+  String toString() =>
+      "Bicycle - tires: $tires, color: $color, bumper: $bumper";
 }

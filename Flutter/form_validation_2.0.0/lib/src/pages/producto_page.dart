@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:form_validation/src/models/producto_model.dart';
 import 'package:form_validation/src/utils/utils.dart';
 
 class ProductoPage extends StatefulWidget {
@@ -8,7 +10,7 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
-
+  ProductoModel productoModel = new ProductoModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +36,7 @@ class _ProductoPageState extends State<ProductoPage> {
               children: <Widget>[
                 _crearNombre(),
                 _crearPrecio(),
+                _crearDisponible(),
                 SizedBox(height: 20.0),
                 _crearBoton()
               ],
@@ -46,10 +49,12 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _crearNombre() {
     return TextFormField(
+      initialValue: productoModel.titulo,
       textCapitalization: TextCapitalization.sentences,
       decoration: InputDecoration(
         labelText: 'Producto'
       ),
+      onSaved: (value) => productoModel.titulo = value,
       validator: (value) {
         return (value.length < 3) ? 'Ingrese el nombre del producto' : null;
       },
@@ -58,10 +63,12 @@ class _ProductoPageState extends State<ProductoPage> {
 
   Widget _crearPrecio() {
     return TextFormField(
+      initialValue: productoModel.valor.toString(),
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
         labelText: 'Precio'
       ),
+      onSaved: (value) => productoModel.valor = double.parse(value),
       validator: (value) {
         return (isNumeric(value)) ? null : 'Ingrese el precio del producto';
       },
@@ -88,6 +95,20 @@ class _ProductoPageState extends State<ProductoPage> {
 
   void _submit() {
     if( !formKey.currentState.validate() ) return;
+    formKey.currentState.save();
     print('Válido');
+    print(productoModel.titulo);
+    print(productoModel.valor);
+  }
+
+  Widget _crearDisponible() {
+    return SwitchListTile(
+      value: productoModel.disponible, 
+      title: Text('Disponible'),
+      activeColor: Colors.deepPurple,
+      onChanged: (value) => setState((){
+        productoModel.disponible = value;
+      }),
+    );
   }
 }

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:form_validation/src/models/producto_model.dart';
 import 'package:form_validation/src/providers/productos_provider.dart';
@@ -13,6 +16,9 @@ class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
   final ProductosProvider productoProvider = new ProductosProvider();
   ProductoModel productoModel = new ProductoModel();
+  bool _guardando = false;
+  File foto;
+
   @override
   Widget build(BuildContext context) {
     final ProductoModel prodData = ModalRoute.of(context).settings.arguments;
@@ -25,11 +31,11 @@ class _ProductoPageState extends State<ProductoPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
-            onPressed: () {},
+            onPressed: _seleccionarFoto,
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: () {},
+            onPressed: _tomarFoto,
           ),
         ],
       ),
@@ -40,6 +46,7 @@ class _ProductoPageState extends State<ProductoPage> {
             key: formKey,
             child: Column(
               children: <Widget>[
+                _mostrarFoto(),
                 _crearNombre(),
                 _crearPrecio(),
                 _crearDisponible(),
@@ -105,7 +112,7 @@ class _ProductoPageState extends State<ProductoPage> {
         ),
         icon: Icon(Icons.save),
         label: Text('Guardar'),
-        onPressed: _submit
+        onPressed: _guardando ? CircularProgressIndicator() : _submit 
       ),
     );
   }
@@ -113,11 +120,55 @@ class _ProductoPageState extends State<ProductoPage> {
   void _submit() {
     if( !formKey.currentState.validate() ) return;
     formKey.currentState.save();
-    
+
+    setState(() {
+      _guardando = true;
+    });
     if (productoModel.id == null) {
       productoProvider.crearProducto(productoModel);
     } else {
       productoProvider.editarProducto(productoModel);
     }
+    setState(() {
+      _guardando = false;
+    });
+    showSnackBar('Registro guardado');
+    Navigator.pop(context);
+
+  }
+
+  void showSnackBar(String mensaje) {
+    final snackBar = SnackBar(
+      content: Text(mensaje),
+      duration: Duration(milliseconds: 1500),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Widget _mostrarFoto() {
+    
+    if (productoModel.fotoUrl != null) {
+      return Container();
+    } else {
+      return ( foto != null ) 
+      ? Image.file(
+          foto,
+          fit: BoxFit.cover,
+          height: 300.0,
+        )
+      : Image.asset('assets/no-image.png');
+    }
+  }
+  _seleccionarFoto() async{
+    final picker = ImagePicker();
+    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    setState(() {
+      foto = File(pickedFile.path);
+      print(foto.path);
+    });
+  }
+
+  _tomarFoto() {
+    
   }
 }

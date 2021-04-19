@@ -31,11 +31,11 @@ class _ProductoPageState extends State<ProductoPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
-            onPressed: _seleccionarFoto,
+            onPressed: _procesarImagen(ImageSource.gallery),
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: _tomarFoto,
+            onPressed: _procesarImagen(ImageSource.camera),
           ),
         ],
       ),
@@ -146,7 +146,6 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   Widget _mostrarFoto() {
-    
     if (productoModel.fotoUrl != null) {
       return Container();
     } else {
@@ -159,16 +158,13 @@ class _ProductoPageState extends State<ProductoPage> {
       : Image.asset('assets/no-image.png');
     }
   }
-  _seleccionarFoto() async{
+
+  _procesarImagen(ImageSource sourceImage) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.getImage(source: sourceImage);
     setState(() {
       foto = File(pickedFile.path);
       print(foto.path);
     });
-  }
-
-  _tomarFoto() {
-    
   }
 }

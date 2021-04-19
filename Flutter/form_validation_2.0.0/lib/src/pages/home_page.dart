@@ -48,9 +48,17 @@ class HomePage extends StatelessWidget {
   Widget _crearItem(BuildContext context,ProductoModel producto) {
     return Dismissible(
       key: UniqueKey(),
-      background: Container(color: Colors.red),
+      direction: DismissDirection.endToStart,
+      background: Container(
+        alignment: AlignmentDirectional.centerEnd,
+        color: Colors.red,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+          child: Icon(Icons.delete, color: Colors.white),
+        ),
+      ),
       onDismissed: (direction) {
-        // TODO: Borrar Producto;
+        productosProvider.borrarProducto(producto.id);
       } ,
       child: ListTile(
         title: Text('${producto.titulo} - ${producto.valor}'),

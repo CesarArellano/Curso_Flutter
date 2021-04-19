@@ -31,11 +31,15 @@ class _ProductoPageState extends State<ProductoPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.photo_size_select_actual),
-            onPressed: _procesarImagen(ImageSource.gallery),
+            onPressed:() {
+              _procesarImagen(ImageSource.gallery);
+            }
           ),
           IconButton(
             icon: Icon(Icons.camera_alt),
-            onPressed: _procesarImagen(ImageSource.camera),
+            onPressed:() {
+              _procesarImagen(ImageSource.camera);
+            }
           ),
         ],
       ),
@@ -162,9 +166,10 @@ class _ProductoPageState extends State<ProductoPage> {
   _procesarImagen(ImageSource sourceImage) async {
     final picker = ImagePicker();
     final pickedFile = await picker.getImage(source: sourceImage);
-    setState(() {
-      foto = File(pickedFile.path);
-      print(foto.path);
-    });
+    if(pickedFile != null) {
+      setState(() {
+        foto = File(pickedFile.path) ?? null;
+      });
+    }
   }
 }

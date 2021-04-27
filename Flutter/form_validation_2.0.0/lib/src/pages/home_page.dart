@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:form_validation/src/bloc/provider.dart';
 import 'package:form_validation/src/models/producto_model.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final productsBloc = Provider.productsBloc(context);
@@ -22,7 +27,9 @@ class HomePage extends StatelessWidget {
     return FloatingActionButton(
       child: Icon( Icons.add ),
       backgroundColor: Colors.deepPurple,
-      onPressed: () => Navigator.pushNamed(context, 'producto'),
+      onPressed: () => Navigator.pushNamed(context, 'producto').then((value) {
+        setState(() {});
+      }),
     );
   }
 
@@ -35,7 +42,7 @@ class HomePage extends StatelessWidget {
           final productos = snapshot.data;
           return ListView.builder(
             itemCount: productos.length,
-            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos[index], productsBloc)
+            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos[index], productsBloc),
           );
         } else {
           return Center(child: CircularProgressIndicator());
@@ -62,7 +69,9 @@ class HomePage extends StatelessWidget {
         child: Card(
           margin: EdgeInsets.zero,
           child: InkWell(
-            onTap: () => Navigator.pushNamed(context, 'producto', arguments: producto),
+            onTap: () => Navigator.pushNamed(context, 'producto', arguments: producto).then((value) {
+              setState(() {});
+            }),
             child: Column(
               children: <Widget>[
                 (producto.fotoUrl == null)

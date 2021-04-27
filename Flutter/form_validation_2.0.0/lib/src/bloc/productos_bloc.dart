@@ -13,24 +13,24 @@ class ProductsBloc {
   Stream<List<ProductoModel>> get productosStream => _productsController.stream;
   Stream<bool> get load => _loadController.stream;
 
-  void loadProducts() async {
+  loadProducts() async {
     final products = await _productsProvider.cargarProductos();
     _productsController.sink.add( products );
   }
   
-  void addProduct(ProductoModel producto) async {
+  addProduct(ProductoModel producto) async {
     _loadController.sink.add(true);
     await _productsProvider.crearProducto(producto);
     _loadController.sink.add(false);
   }
 
-  void editProduct(ProductoModel producto) async {
+  editProduct(ProductoModel producto) async {
     _loadController.sink.add(true);
     await _productsProvider.editarProducto(producto);
     _loadController.sink.add(false);
   }
 
-  void deleteProduct(String productId) async {
+  deleteProduct(String productId) async {
     await _productsProvider.borrarProducto(productId);
   }
 

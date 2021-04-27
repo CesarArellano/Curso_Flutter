@@ -55,7 +55,7 @@ class _ProductoPageState extends State<ProductoPage> {
                 _crearPrecio(),
                 _crearDisponible(),
                 SizedBox(height: 20.0),
-                _crearBoton()
+                _guardando ? CircularProgressIndicator() :_crearBoton()
               ],
             ),
           ),
@@ -116,7 +116,7 @@ class _ProductoPageState extends State<ProductoPage> {
         ),
         icon: Icon(Icons.save),
         label: Text('Guardar'),
-        onPressed: _guardando ? CircularProgressIndicator() : _submit 
+        onPressed: _submit 
       ),
     );
   }

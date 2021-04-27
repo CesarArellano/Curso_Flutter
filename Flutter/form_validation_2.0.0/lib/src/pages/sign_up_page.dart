@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:form_validation/src/bloc/provider.dart';
 import 'package:form_validation/src/providers/user_provider.dart';
 
-class LoginPage extends StatelessWidget {
-  final userProvider = UserProvider();
+class RegisterPage extends StatelessWidget {
+  final usuarioProvider = new UserProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +47,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                Text('Ingreso', style: TextStyle(fontSize: 20.0)),
+                Text('Crear una cuenta', style: TextStyle(fontSize: 20.0)),
                 SizedBox(height: 30.0),
                 _crearEmail(bloc),
                 SizedBox(height: 10.0),
@@ -59,8 +58,8 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           TextButton(
-            child: Text('Crear una nueva cuenta'),
-            onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
+            child: Text('¿Ya tienes cuenta?'),
+            onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
           ),
           SizedBox(height: 100.0)
         ],
@@ -169,19 +168,17 @@ class LoginPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(5.0)
             ),
           ),      
-          onPressed: snapshot.hasData ? () => _login(context, bloc) : null,
+          onPressed: snapshot.hasData ? () => _register(context, bloc) : null,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Ingresar', style: TextStyle(color: Colors.white)),
+            child: Text('Registrar', style: TextStyle(color: Colors.white)),
           ),
         );
       },
     );
   }
 
-  _login( BuildContext context, LoginBloc bloc) async {
-    final result = await userProvider.login(bloc.email, bloc.password);
-    
-    // Navigator.pushNamed(context, 'home');
+  _register( BuildContext context, LoginBloc bloc) {
+    usuarioProvider.newUser(bloc.email, bloc.password);
   }
 }

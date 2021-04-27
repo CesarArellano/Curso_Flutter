@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:form_validation/src/bloc/provider.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:form_validation/src/models/producto_model.dart';
-import 'package:form_validation/src/providers/productos_provider.dart';
 import 'package:form_validation/src/utils/utils.dart';
 
 class ProductoPage extends StatefulWidget {
@@ -14,13 +14,16 @@ class ProductoPage extends StatefulWidget {
 
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
-  final ProductosProvider productoProvider = new ProductosProvider();
+
+  ProductsBloc productsBloc;
   ProductoModel productoModel = new ProductoModel();
   bool _guardando = false;
   File foto;
 
   @override
   Widget build(BuildContext context) {
+    productsBloc = Provider.productsBloc(context);
+
     final ProductoModel prodData = ModalRoute.of(context).settings.arguments;
     if(prodData != null) {
       productoModel = prodData;
@@ -130,13 +133,13 @@ class _ProductoPageState extends State<ProductoPage> {
     });
 
     if(foto != null) {
-      productoModel.fotoUrl = await productoProvider.subirImagen(foto);
+      productoModel.fotoUrl = await productsBloc.uploadPhoto(foto);
     }
 
     if (productoModel.id == null) {
-      productoProvider.crearProducto(productoModel);
+      productsBloc.addProduct(productoModel);
     } else {
-      productoProvider.editarProducto(productoModel);
+      productsBloc.editProduct(productoModel);
     }
     setState(() {
       _guardando = false;

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:form_validation/src/bloc/provider.dart';
 import 'package:form_validation/src/providers/user_provider.dart';
+import 'package:form_validation/src/utils/utils.dart';
 
 class LoginPage extends StatelessWidget {
   final userProvider = UserProvider();
@@ -181,7 +182,10 @@ class LoginPage extends StatelessWidget {
 
   _login( BuildContext context, LoginBloc bloc) async {
     final result = await userProvider.login(bloc.email, bloc.password);
-    
-    // Navigator.pushNamed(context, 'home');
+    if( result['ok'] ) {
+      Navigator.pushNamed(context, 'home');
+    } else {
+      showAlert(context, result['message']);
+    }
   }
 }

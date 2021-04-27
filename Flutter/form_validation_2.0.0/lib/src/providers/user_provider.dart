@@ -23,9 +23,8 @@ class UserProvider {
     if (decodedData.containsKey('idToken')) {
       saveToken(decodedData['idToken']);
       return { 'ok': true, 'token': decodedData['idToken']};
-
     } else {
-      return { 'ok': false, 'token': decodedData['error']['message']};
+      return { 'ok': false, 'message': decodedData['error']['message']};
     }
   }
 
@@ -46,7 +45,7 @@ class UserProvider {
       saveToken(decodedData['idToken']);
       return { 'ok': true };
     } else {
-      return { 'ok': false, 'token': decodedData['error']['message']};
+      return { 'ok': false, 'message': decodedData['error']['message']};
     }
   }
   

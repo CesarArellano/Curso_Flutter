@@ -24,7 +24,11 @@ class ProductosProvider {
     final resp = await http.get(url);
     final Map<String, dynamic> decodedData = json.decode(resp.body);
     final List<ProductoModel> productos = [];
+    
     if(decodedData == null) return [];
+
+    if(decodedData['error'] != null) return []; // Validación token
+
     decodedData.forEach((id, prod) {  // Key y Value
       final prodTemp = ProductoModel.fromJson(prod);
       prodTemp.id = id;

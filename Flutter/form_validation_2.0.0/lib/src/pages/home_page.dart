@@ -5,17 +5,16 @@ import 'package:form_validation/src/providers/productos_provider.dart';
 
 class HomePage extends StatelessWidget {
 
-  final productosProvider = new ProductosProvider();
-
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of(context);
+    final productsBloc = Provider.productsBloc(context);
+    productsBloc.loadProducts();
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Page'),     
       ),
-      body: _crearListado(),
+      body: _crearListado(productsBloc),
       floatingActionButton: _crearBoton(context),
     );
   }
@@ -28,15 +27,16 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearListado() {
-    return FutureBuilder(
-      future: productosProvider.cargarProductos(),
+  Widget _crearListado(ProductsBloc productsBloc) {
+    
+    return StreamBuilder(
+      stream: productsBloc.productosStream,
       builder: (BuildContext context, AsyncSnapshot<List<ProductoModel>> snapshot) {
         if (snapshot.hasData) {
           final productos = snapshot.data;
           return ListView.builder(
             itemCount: productos.length,
-            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos[index])
+            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos[index], productsBloc)
           );
         } else {
           return Center(child: CircularProgressIndicator());
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _crearItem(BuildContext context,ProductoModel producto) {
+  Widget _crearItem(BuildContext context,ProductoModel producto, ProductsBloc productsBloc) {
     return Dismissible(
       key: UniqueKey(),
       direction: DismissDirection.endToStart,
@@ -57,9 +57,7 @@ class HomePage extends StatelessWidget {
           child: Icon(Icons.delete, color: Colors.white),
         ),
       ),
-      onDismissed: (direction) {
-        productosProvider.borrarProducto(producto.id);
-      } ,
+      onDismissed: (direction) => productsBloc.deleteProduct(producto.id),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
         child: Card(

@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:pushapp/screens/home_screen.dart';
 import 'package:pushapp/screens/message_screen.dart';
+import 'package:pushapp/services/push_notifications_service.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationService.initializeApp();
+  runApp(MyApp());
+} 
 
 class MyApp extends StatelessWidget {
   @override

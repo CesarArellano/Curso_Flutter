@@ -1,20 +1,27 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class PushNotificationService {
   static FirebaseMessaging messsaging = FirebaseMessaging.instance;
   static String? token;
+  static StreamController<String> _messageStream = new StreamController.broadcast(); // I need this property because I want to use it to navigate to any screen.
+  static Stream<String> get messagesStream => _messageStream.stream;
 
   static Future _onBackgroundHandler(RemoteMessage message) async {
-    print('onBackground Handler ${ message.messageId }');
+    print('onBackground Handler ${ message.data }');
+    _messageStream.add(message.notification?.title ?? 'No title');
   }
 
   static Future _onMessageHandler(RemoteMessage message) async {
-    print('onMessage Handler ${ message.messageId }');
+    print('onMessage Handler ${ message.data }');
+    _messageStream.add(message.notification?.title ?? 'No title');
   }
 
   static Future _onMessageOpenHandler(RemoteMessage message) async {
-    print('onMessageOpen Handler ${ message.messageId }');
+    print('onMessageOpen Handler ${ message.data }');
+    _messageStream.add(message.notification?.title ?? 'No title');
   }
 
   static Future initializeApp() async {
@@ -28,6 +35,8 @@ class PushNotificationService {
     FirebaseMessaging.onMessage.listen(_onMessageHandler);
     FirebaseMessaging.onMessageOpenedApp.listen(_onMessageOpenHandler);
   }
+  
+  static closeStreams() {
+    _messageStream.close();
+  }
 }
-
-// eAKR8LoDTaGlnRN0FTGCSD:APA91bGOVkdJTAMG5iO9MWzwcEH8yG3SEDChKTpn9yWQiQ6Zkw02zXTIQvxvkKE2VAW8c7N-U8rt-_RGu5pqp13yTw_gYfZpLzgk3qqxVaZwDrWcxipYNlTpE7Hy_dTn7CuKfJUGKNZz

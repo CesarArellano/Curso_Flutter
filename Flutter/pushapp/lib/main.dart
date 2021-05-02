@@ -10,13 +10,27 @@ void main() async {
   runApp(MyApp());
 } 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() { 
+    super.initState();
+    PushNotificationService.messagesStream.listen((message) {
+      print('MyApp: $message');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      initialRoute: 'message',
+      initialRoute: 'home',
       routes: {
         'home': (BuildContext context) => HomeScreen(),
         'message': (BuildContext context) => MessageScreen()

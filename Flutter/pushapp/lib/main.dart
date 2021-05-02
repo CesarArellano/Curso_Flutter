@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     PushNotificationService.messagesStream.listen((message) {
       print(message);
-      navigatorKey.currentState?.pushNamed('message', arguments: message);
+      navigatorKey.currentState?.pushNamed('message', arguments: message); // Navegar a la segunda pantalla con los argumentos de la notificación
       final snackBar = SnackBar(content: Text(message));
       messengerKey.currentState?.showSnackBar(snackBar); // ? Si no está inicializado no hará esta instrucción.
     });

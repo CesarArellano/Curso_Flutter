@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:newsapp/src/models/news_models.dart';
 
-final _urlNews = 'https://newsapi.org/v2/';
-final _apikey = 'e29217facc864b0a920bffe5d4';
+final _urlNews = 'https://newsapi.org/v2';
+final _apikey = 'e29217facc864b0a920bffe5d4b0adab';
 
 class NewsService with ChangeNotifier {
   List<Article> headlines = [];

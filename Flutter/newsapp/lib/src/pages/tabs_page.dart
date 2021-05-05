@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TabsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _Pages(),
-      bottomNavigationBar: NavigationBar(),
+    return ChangeNotifierProvider(
+      create: (_) => _NavigationModel(),
+      child: Scaffold(
+        body: _Pages(),
+        bottomNavigationBar: NavigationBar(),
+      ),
     );
   }
 }
@@ -33,8 +37,11 @@ class _Pages extends StatelessWidget {
 class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final navigationModel = Provider.of<_NavigationModel>(context);
+    
     return BottomNavigationBar(
-      currentIndex: 0,
+      currentIndex: navigationModel.currentPage,
+      onTap: (index) => navigationModel.currentPage = index,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon( Icons.person_outline ),
@@ -46,5 +53,16 @@ class NavigationBar extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class _NavigationModel with ChangeNotifier {
+  int _currentPage = 0;
+
+  int get currentPage => this._currentPage;
+
+  set currentPage(int value) {
+    this._currentPage = value;
+    notifyListeners();
   }
 }

@@ -27,6 +27,7 @@ class _News extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(      
       children: <Widget>[
+        SizedBox(height: 15.0),
         _TopBarCard(news, index),
         _TitleCard(news),
         _ImageCard(news),

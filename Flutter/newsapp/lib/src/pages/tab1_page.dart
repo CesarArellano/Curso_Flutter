@@ -20,7 +20,7 @@ class _Tab1PageState extends State<Tab1Page> with AutomaticKeepAliveClientMixin 
     return (headlines.length == 0)
     ? Center( child: CircularProgressIndicator() )
     : Container( 
-      padding: EdgeInsets.all(15.0),
+      padding: EdgeInsets.symmetric(horizontal: 15.0),
       child: NewsList(headlines)
     );
   }

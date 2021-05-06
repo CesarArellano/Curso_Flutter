@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:newsapp/src/widgets/list_news.dart';
 
 import 'package:provider/provider.dart';
 import 'package:newsapp/src/services/news_service.dart';
+
+import 'package:newsapp/src/widgets/list_news.dart';
 
 // Aplicando Keep Alive para que no pierda el estado y se mantenga en la noticia anterior.
 class Tab1Page extends StatefulWidget {
@@ -18,7 +19,10 @@ class _Tab1PageState extends State<Tab1Page> with AutomaticKeepAliveClientMixin 
     final headlines = Provider.of<NewsService>(context).headlines;
     return (headlines.length == 0)
     ? Center( child: CircularProgressIndicator() )
-    : Container( child: ListNews(headlines) );
+    : Container( 
+      padding: EdgeInsets.all(15.0),
+      child: NewsList(headlines)
+    );
   }
 
   @override

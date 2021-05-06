@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:newsapp/src/models/news_models.dart';
 import 'package:newsapp/src/theme/theme.dart';
 
-class ListNews extends StatelessWidget {
+class NewsList extends StatelessWidget {
   final List<Article> news;
-  const ListNews( this.news );
+  const NewsList( this.news );
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: this.news.length,
       itemBuilder: (BuildContext context, int index) {
         return _News(news: this.news[index], index: index);
@@ -24,7 +25,7 @@ class _News extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Column(      
       children: <Widget>[
         _TopBarCard(news, index),
         _TitleCard(news),
@@ -32,7 +33,7 @@ class _News extends StatelessWidget {
         _BodyCard(news),
         _ButtonsCard(news),
         SizedBox(height: 10.0),
-        Divider(),
+        Divider(thickness: 1.0),
       ]
     );
   }
@@ -75,7 +76,8 @@ class _BodyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text((news.description != null) ? news.description : ''),
+      padding: EdgeInsets.symmetric(vertical: 6.0),
+      child: Text((news.description != null) ? news.description : '', textAlign: TextAlign.justify),
     );
   }
 }
@@ -130,7 +132,7 @@ class _TopBarCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: <Widget>[
-          Text('${index + 1}.', style: TextStyle( color: myTheme.accentColor )),
+          Text('${index + 1}. ', style: TextStyle( color: myTheme.accentColor )),
           Text('${news.source.name}.')
         ],
       )

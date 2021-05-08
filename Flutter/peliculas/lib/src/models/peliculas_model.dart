@@ -4,8 +4,6 @@ class Peliculas {
   Peliculas();
 
   Peliculas.fromJsonList(List<dynamic> jsonList) {
-    if (jsonList == null) return;
-
     for (final item in jsonList) {
       final pelicula = new Pelicula.fromJsonMap(item);
       items.add(pelicula);
@@ -14,21 +12,20 @@ class Peliculas {
 }
 
 class Pelicula {
-  String uniqueId; // Solución Hero Animation
-  bool adult;
-  String backdropPath;
-  List<int> genreIds;
-  int id;
-  String originalLanguage;
-  String originalTitle;
-  String overview;
-  double popularity;
-  String posterPath;
-  String releaseDate;
-  String title;
-  bool video;
-  double voteAverage;
-  int voteCount;
+  bool? adult;
+  String? backdropPath;
+  List<int>? genreIds;
+  int? id;
+  String? originalLanguage;
+  String? originalTitle;
+  String? overview;
+  double? popularity;
+  String? posterPath;
+  String? releaseDate;
+  String? title;
+  bool? video;
+  double? voteAverage;
+  int? voteCount;
 
   Pelicula({
     this.adult,
@@ -63,6 +60,15 @@ class Pelicula {
     overview = json['overview'];
     releaseDate = json['release_date'];
   }
+
+  get uniqueIdCard {
+    return '$id-tarjeta';
+  }
+
+  get uniqueIdBanner {
+    return '$id-banner';
+  }
+
   getPosterImg() {
     if (posterPath == null) {
       return 'https://sciences.ucf.edu/puerto-rico-hub/wp-content/uploads/sites/218/2020/04/No-Image-Available.jpg';

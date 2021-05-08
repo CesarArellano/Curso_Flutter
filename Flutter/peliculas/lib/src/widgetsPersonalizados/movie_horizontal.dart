@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/peliculas_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
-  final List<Pelicula> peliculas;
-  final Function siguientePagina;
+  final List<Pelicula>? peliculas;
+  final siguientePagina;
 
   MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
 
   final _pageController = new PageController(
-    initialPage: 1,
     viewportFraction: 0.3,
   );
 
@@ -23,25 +22,25 @@ class MovieHorizontal extends StatelessWidget {
     });
     return Container(
       height: _screenSize.height * 0.28,
-      child: PageView.builder(
+      child: ListView.builder(
         physics: BouncingScrollPhysics(),
-        pageSnapping: false,
+        scrollDirection: Axis.horizontal,
         controller: _pageController,
-        itemCount: peliculas.length,
+        itemCount: peliculas!.length,
         itemBuilder: (BuildContext context, int i) {
-          return _tarjeta(context, peliculas[i]);
+          return _tarjeta(context, peliculas![i]);
         },
       ),
     );
   }
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    pelicula.uniqueId = '${pelicula.id}-poster';
     final peliculaTarjeta = Container(
+      margin: EdgeInsets.only(left: 15.0),
       child: Column(
         children: <Widget>[
           Hero(
-            tag: pelicula.uniqueId,
+            tag: pelicula.uniqueIdCard,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: FadeInImage(
@@ -55,9 +54,13 @@ class MovieHorizontal extends StatelessWidget {
           SizedBox(
             height: 5.0,
           ),
-          Text(pelicula.title,
+          Container(
+            width: 120.0,
+            child: Text(pelicula.title!,
+              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.caption),
+          ),
         ],
       ),
     );

@@ -10,14 +10,14 @@ class Cast {
 }
 
 class Actor {
-  int gender;
-  int id;
-  String name;
-  String profilePath;
-  int castId;
-  String character;
-  String creditId;
-  int order;
+  int? gender;
+  int? id;
+  String? name;
+  String? profilePath;
+  int? castId;
+  String? character;
+  String? creditId;
+  int? order;
 
   Actor({
     this.gender,

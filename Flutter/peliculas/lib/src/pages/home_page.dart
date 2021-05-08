@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peliculas/src/models/peliculas_model.dart';
 
 import 'package:peliculas/src/providers/peliculas_provider.dart';
 import 'package:peliculas/src/search/search_delegate.dart';
@@ -44,10 +45,10 @@ class HomePage extends StatelessWidget {
   Widget _swipeTarjetas() {
     return FutureBuilder(
       future: peliculasProvider.getEnCines(),
-      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
         if (snapshot.hasData) {
           return CardSwiper(
-            peliculas: snapshot.data,
+            snapshot.data!,
           );
         } else {
           return Container(

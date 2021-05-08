@@ -16,7 +16,8 @@ class CardSwiper extends StatelessWidget {
       options: CarouselOptions(
         autoPlay: true,
         aspectRatio: 2.0,
-        enlargeCenterPage: true
+        enlargeCenterPage: true,
+        height: 250.0
       ),
     );
   }

@@ -9,7 +9,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="qr_reader"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCefCHBLSaFBVVFmPApJ1FgYf7KrCQxRCw"/>        

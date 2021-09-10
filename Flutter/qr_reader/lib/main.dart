@@ -27,6 +27,10 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.deepPurple,
           floatingActionButtonTheme: FloatingActionButtonThemeData(
             backgroundColor: Colors.deepPurple
+          ), 
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: Colors.deepPurple,
+            secondary: Colors.deepPurple
           )
         )
       ),

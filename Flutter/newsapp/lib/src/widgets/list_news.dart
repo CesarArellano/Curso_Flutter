@@ -53,7 +53,7 @@ class _ButtonsCard extends StatelessWidget {
       children: <Widget>[
         RawMaterialButton(
           onPressed: () {},
-          fillColor: myTheme.accentColor,
+          fillColor: myTheme.colorScheme.secondary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Icon(Icons.star_border)
         ),
@@ -133,7 +133,7 @@ class _TopBarCard extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 10.0),
       child: Row(
         children: <Widget>[
-          Text('${index + 1}. ', style: TextStyle( color: myTheme.accentColor )),
+          Text('${index + 1}. ', style: TextStyle( color: myTheme.colorScheme.secondary )),
           Text('${news.source.name}.')
         ],
       )

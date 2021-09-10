@@ -7,16 +7,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:qr_reader/models/scan_model.dart';
 
 class DBProvider {
-  static Database _database;
+  static Database? _database ;
   static final DBProvider db = DBProvider._();
 
   DBProvider._(); // Constructor privado, para obtener la misma instancia de mi objeto de la BD.
   
   Future<Database> get database async {
-    if(_database != null) return _database;
+    if(_database != null) return _database!;
     _database = await initDB();
     
-    return _database;
+    return _database!;
   }
 
   Future<Database> initDB() async {
@@ -52,7 +52,7 @@ class DBProvider {
     return res;
   }
 
-  Future<ScanModel> getScanById(int id) async {
+  Future<ScanModel?> getScanById(int id) async {
     final db = await database;
     final res = await db.query('Scans', where: 'id = ?', whereArgs: [id]);
 

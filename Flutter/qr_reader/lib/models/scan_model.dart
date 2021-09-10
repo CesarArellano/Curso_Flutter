@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:meta/meta.dart'; // Importa el @required
 import 'package:google_maps_flutter/google_maps_flutter.dart' show LatLng;
 
 ScanModel scanModelFromJson(String str) => ScanModel.fromJson(json.decode(str));
@@ -10,7 +9,7 @@ class ScanModel {
     ScanModel({
         this.id,
         this.tipo,
-        @required this.valor,
+        required this.valor,
     }) {
       if (this.valor.contains('http')) {
         this.tipo = 'http';
@@ -19,8 +18,8 @@ class ScanModel {
       }
     }
 
-    int id;
-    String tipo;
+    int? id;
+    String? tipo;
     String valor;
 
     LatLng getLatLng() {

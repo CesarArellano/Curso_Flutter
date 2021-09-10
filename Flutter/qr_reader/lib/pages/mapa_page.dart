@@ -15,7 +15,7 @@ class _MapaPageState extends State<MapaPage> {
   bool isMapVisible = true;
   @override
   Widget build(BuildContext context) {
-    final ScanModel scan = ModalRoute.of(context).settings.arguments;
+    final scan = ModalRoute.of(context)!.settings.arguments as ScanModel;
     
     final CameraPosition puntoInicial = CameraPosition(
       target: scan.getLatLng(),      

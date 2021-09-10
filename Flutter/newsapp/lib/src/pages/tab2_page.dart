@@ -92,7 +92,7 @@ class _CategoryButton extends StatelessWidget {
         child: Icon(
           category.icon,
           color: (newsService.selectedCategory == category.name) 
-            ? myTheme.accentColor 
+            ? myTheme.colorScheme.secondary 
             : Colors.black54,
         )
       ),

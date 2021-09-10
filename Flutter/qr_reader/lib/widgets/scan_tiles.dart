@@ -8,7 +8,7 @@ import 'package:qr_reader/utils/utils.dart';
 class ScanTiles extends StatelessWidget {
   final String tipo;
 
-  const ScanTiles({ @required this.tipo });
+  const ScanTiles({ required this.tipo });
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class ScanTiles extends StatelessWidget {
 }
 
 class EmptyScans extends StatelessWidget {
-  EmptyScans({ @required this.widthDevice });
+  EmptyScans({ required this.widthDevice });
 
   final double widthDevice;
 
@@ -48,8 +48,8 @@ class ScansList extends StatelessWidget {
   final String tipo;
   
   ScansList({
-    @required this.scans,
-    @required this.tipo,
+    required this.scans,
+    required this.tipo,
   });
 
   @override
@@ -64,7 +64,7 @@ class ScansList extends StatelessWidget {
         ),
         onDismissed: (DismissDirection direction) {
           Provider.of<ScanListProvider>(context, listen:false)
-            .borrarScanPorID(scans[i].id);
+            .borrarScanPorID(scans[i].id!);
         },
         child: ListTile(
           leading: Icon(

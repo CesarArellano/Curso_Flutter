@@ -33,30 +33,30 @@ class _ContadorPageState extends State<ContadorPage> {
         ),
       ),
       floatingActionButton: _crearBotones(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   Widget _crearBotones() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        const SizedBox(width: 30.0),
-        FloatingActionButton(
-          child: const Icon(Icons.exposure_zero),
-          onPressed: _reset,
-        ),
-        const Expanded( child: SizedBox() ),
-        FloatingActionButton(
-          child: const Icon(Icons.remove),
-          onPressed: _sustraer,
-        ),
-        const Expanded( child: SizedBox() ),
-        FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: _agregar,
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            child: const Icon(Icons.exposure_zero),
+            onPressed: _reset,
+          ),
+          FloatingActionButton(
+            child: const Icon(Icons.exposure_neg_1),
+            onPressed: _sustraer,
+          ),
+          FloatingActionButton(
+            child: const Icon(Icons.exposure_plus_1),
+            onPressed: _agregar,
+          )
+        ],
+      ),
     );
   }
 

@@ -6,7 +6,7 @@ import 'package:peliculas/src/models/peliculas_model.dart';
 class CardSwiper extends StatelessWidget {
   final List<Pelicula> peliculas;
 
-  CardSwiper(this.peliculas);
+  const CardSwiper({ Key? key, this.peliculas = const [] }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class CardSwiper extends StatelessWidget {
 class MoviePosterImage extends StatelessWidget {
   final Pelicula pelicula;
 
-  MoviePosterImage(this.pelicula);
+  const MoviePosterImage(this.pelicula, { Key? key }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class MoviePosterImage extends StatelessWidget {
       onTap: () => Navigator.pushNamed(context, 'detalle', arguments: pelicula),
       child: FadeInImage(
         image: NetworkImage(pelicula.getBackgroundImg()),
-        placeholder: AssetImage('assets/img/loading.gif'),
+        placeholder: const AssetImage('assets/img/loading.gif'),
         fit: BoxFit.cover,
       ),
     );

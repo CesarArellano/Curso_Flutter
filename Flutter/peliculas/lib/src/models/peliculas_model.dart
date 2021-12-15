@@ -5,7 +5,7 @@ class Peliculas {
 
   Peliculas.fromJsonList(List<dynamic> jsonList) {
     for (final item in jsonList) {
-      final pelicula = new Pelicula.fromJsonMap(item);
+      final pelicula = Pelicula.fromJsonMap(item);
       items.add(pelicula);
     }
   }

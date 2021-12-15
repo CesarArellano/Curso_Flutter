@@ -7,31 +7,32 @@ import 'package:peliculas/src/models/peliculas_model.dart';
 import 'package:peliculas/src/providers/peliculas_provider.dart';
 
 class PeliculaDetalle extends StatelessWidget {
+
+  const PeliculaDetalle({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final Pelicula pelicula = ModalRoute.of(context)?.settings.arguments as Pelicula;
 
-    return Container(
-      child: Scaffold(
-        body: CustomScrollView(
-          // Tipo ListView
-          slivers: <Widget>[
-            _crearAppBar(pelicula),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  SizedBox(height: 10.0),
-                  _posterTitulo(context, pelicula),
-                  SizedBox(height: 5.0),
-                  _descripcion(pelicula),
-                  _descripcion(pelicula),
-                  _descripcion(pelicula),
-                  _crearCasting(pelicula),
-                ],
-              ),
+    return Scaffold(
+      body: CustomScrollView(
+        // Tipo ListView
+        slivers: <Widget>[
+          _crearAppBar(pelicula),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                const SizedBox(height: 10.0),
+                _posterTitulo(context, pelicula),
+                const SizedBox(height: 5.0),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _descripcion(pelicula),
+                _crearCasting(pelicula),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -46,13 +47,13 @@ class PeliculaDetalle extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: FadeIn(
-          delay: Duration(milliseconds: 300),
+          delay: const Duration(milliseconds: 300),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               pelicula.title!,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white, 
                 fontSize: 16.0
               ),
@@ -61,7 +62,7 @@ class PeliculaDetalle extends StatelessWidget {
         ),
         background: FadeInImage(
           image: NetworkImage(pelicula.getBackgroundImg()),
-          placeholder: AssetImage('assets/img/loading.gif'),
+          placeholder: const AssetImage('assets/img/loading.gif'),
           fit: BoxFit.cover,
         ),
       ),
@@ -70,7 +71,7 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _posterTitulo(BuildContext context, Pelicula pelicula) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Row(
           children: <Widget>[
             Hero(
@@ -83,31 +84,37 @@ class PeliculaDetalle extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 20.0),
+            const SizedBox(width: 20.0),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   FadeIn(
-                    delay: Duration(milliseconds: 200),
-                    child: Text(pelicula.title!,
-                        style: Theme.of(context).textTheme.headline6,
-                        overflow: TextOverflow.ellipsis),
+                    delay: const Duration(milliseconds: 200),
+                    child: Text(
+                      pelicula.title!,
+                      style: Theme.of(context).textTheme.headline6,
+                      overflow: TextOverflow.ellipsis
+                    ),
                   ),
                   FadeIn(
-                    delay: Duration(milliseconds: 400),
-                    child: Text(pelicula.originalTitle!,
-                        style: Theme.of(context).textTheme.subtitle1,
-                        overflow: TextOverflow.ellipsis),
+                    delay: const Duration(milliseconds: 400),
+                    child: Text(
+                      pelicula.originalTitle!,
+                      style: Theme.of(context).textTheme.subtitle1,
+                      overflow: TextOverflow.ellipsis
+                    ),
                   ),
                   FadeIn(
-                    delay: Duration(milliseconds: 600),
+                    delay: const Duration(milliseconds: 600),
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.star_border),
-                        Text(pelicula.voteAverage.toString(),
-                            style: Theme.of(context).textTheme.subtitle1,
-                            overflow: TextOverflow.ellipsis),
+                        const Icon(Icons.star_border),
+                        Text(
+                          pelicula.voteAverage.toString(),
+                          style: Theme.of(context).textTheme.subtitle1,
+                          overflow: TextOverflow.ellipsis
+                        ),
                       ],
                     ),
                   )
@@ -120,7 +127,7 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _descripcion(Pelicula pelicula) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
       child: Text(
         pelicula.overview!,
         textAlign: TextAlign.justify,
@@ -129,7 +136,7 @@ class PeliculaDetalle extends StatelessWidget {
   }
 
   Widget _crearCasting(Pelicula pelicula) {
-    final peliProvider = new PeliculasProvider();
+    final peliProvider = PeliculasProvider();
 
     return FutureBuilder(
       future: peliProvider.getCast(pelicula.id.toString()),
@@ -137,10 +144,10 @@ class PeliculaDetalle extends StatelessWidget {
         if (snapshot.hasData) {
           return _crearActoresPageView(snapshot.data);
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(
               backgroundColor: Colors.blue,
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
             ),
           );
         }
@@ -152,7 +159,7 @@ class PeliculaDetalle extends StatelessWidget {
     return SizedBox(
       height: 200.0,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         controller: PageController(
           viewportFraction: 0.3,
@@ -167,7 +174,7 @@ class PeliculaDetalle extends StatelessWidget {
 
   Widget _actorTarjeta(Actor actor) {
     return Container(
-      margin: EdgeInsets.only(left: 10.0),
+      margin: const EdgeInsets.only(left: 10.0),
       child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -175,12 +182,12 @@ class PeliculaDetalle extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
           child: FadeInImage(
             image: NetworkImage(actor.getFoto()),
-            placeholder: AssetImage('assets/img/no-image.jpg'),
+            placeholder: const AssetImage('assets/img/no-image.jpg'),
             height: 150.0,
             fit: BoxFit.cover,
           ),
         ),
-        Container(
+        SizedBox(
           width: 120.0,
           child: Text(actor.name!,
             textAlign: TextAlign.center,

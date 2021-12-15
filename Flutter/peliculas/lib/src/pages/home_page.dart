@@ -7,37 +7,37 @@ import 'package:peliculas/src/widgetsPersonalizados/card_swiper_widget.dart';
 import 'package:peliculas/src/widgetsPersonalizados/movie_horizontal.dart';
 
 class HomePage extends StatelessWidget {
-  final peliculasProvider = new PeliculasProvider();
+  final peliculasProvider = PeliculasProvider();
+
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     peliculasProvider.getPopulares();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        title: const Text('Home Page'),
         backgroundColor: Colors.deepOrange,
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(context: context, delegate: DataSearch());
             },
           )
         ],
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(height: 15.0),
-              _swipeTarjetas(),
-              SizedBox(height: 15.0),
-              _footer(context),
-            ],
-          ),
-        )
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const SizedBox(height: 15.0),
+            _swipeTarjetas(),
+            const SizedBox(height: 15.0),
+            _footer(context),
+          ],
+        ),
       ),
     );
   }
@@ -48,10 +48,10 @@ class HomePage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
         if (snapshot.hasData) {
           return CardSwiper(
-            snapshot.data!,
+            peliculas: snapshot.data!,
           );
         } else {
-          return Container(
+          return const SizedBox(
             height: 400.0,
             child: Center(
               child: CircularProgressIndicator(),
@@ -63,19 +63,17 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _footer(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity, // Expandirse
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 20.0),
+            padding: const EdgeInsets.only(left: 20.0),
             child:
                 Text("Populares", style: Theme.of(context).textTheme.headline6),
           ),
-          SizedBox(
-            height: 10.0,
-          ),
+          const SizedBox( height: 10.0 ),
           StreamBuilder(
             stream: peliculasProvider.popularesStream,
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -85,10 +83,10 @@ class HomePage extends StatelessWidget {
                   siguientePagina: peliculasProvider.getPopulares,
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(
                     backgroundColor: Colors.blue,
-                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
                   ),
                 );
               }

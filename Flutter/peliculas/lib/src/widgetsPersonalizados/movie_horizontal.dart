@@ -3,11 +3,11 @@ import 'package:peliculas/src/models/peliculas_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
   final List<Pelicula>? peliculas;
-  final siguientePagina;
+  final Function siguientePagina;
 
-  MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
+  MovieHorizontal({ Key? key, required this.peliculas, required this.siguientePagina }) : super(key: key);
 
-  final _pageController = new PageController(
+  final _pageController = PageController(
     viewportFraction: 0.3,
   );
 
@@ -20,10 +20,10 @@ class MovieHorizontal extends StatelessWidget {
         siguientePagina();
       }
     });
-    return Container(
+    return SizedBox(
       height: _screenSize.height * 0.28,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         controller: _pageController,
         itemCount: peliculas!.length,
@@ -36,7 +36,7 @@ class MovieHorizontal extends StatelessWidget {
 
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
     final peliculaTarjeta = Container(
-      margin: EdgeInsets.only(left: 15.0),
+      margin: const EdgeInsets.only(left: 15.0),
       child: Column(
         children: <Widget>[
           Hero(
@@ -45,16 +45,14 @@ class MovieHorizontal extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.0),
               child: FadeInImage(
                 image: NetworkImage(pelicula.getPosterImg()),
-                placeholder: AssetImage('assets/img/no-image.jpg'),
+                placeholder: const AssetImage('assets/img/no-image.jpg'),
                 fit: BoxFit.cover,
                 height: 160.0,
               ),
             ),
           ),
+          const SizedBox( height: 5.0 ),
           SizedBox(
-            height: 5.0,
-          ),
-          Container(
             width: 120.0,
             child: Text(pelicula.title!,
               textAlign: TextAlign.center,

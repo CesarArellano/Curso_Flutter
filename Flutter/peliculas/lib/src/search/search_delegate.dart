@@ -5,7 +5,7 @@ import 'package:peliculas/src/providers/peliculas_provider.dart';
 
 class DataSearch extends SearchDelegate {
   String seleccion = '';
-  final peliculasProvider = new PeliculasProvider();
+  final peliculasProvider = PeliculasProvider();
   final peliculas = [
     'Spiderman',
     'Aquaman',
@@ -21,7 +21,7 @@ class DataSearch extends SearchDelegate {
     // Las acciones de nuestro AppBar
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -68,7 +68,7 @@ class DataSearch extends SearchDelegate {
                   subtitle: Text(pelicula.originalTitle!),
                   leading: FadeInImage(
                     image: NetworkImage(pelicula.getPosterImg()),
-                    placeholder: AssetImage('assets/img/no-image.jpg'),
+                    placeholder: const AssetImage('assets/img/no-image.jpg'),
                     width: 50.0,
                     fit: BoxFit.contain,
                   ),
@@ -81,7 +81,7 @@ class DataSearch extends SearchDelegate {
               }).toList(),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }

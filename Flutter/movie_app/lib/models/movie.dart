@@ -28,12 +28,12 @@ class Movie {
   double popularity;
   String? posterPath;
   DateTime? releaseDate;
-  String title;
+  String? title;
   bool video;
   double voteAverage;
   int voteCount;
 
-  get fullPosterImg {
+  String get fullPosterImg {
     return posterPath != null 
       ? 'https://image.tmdb.org/t/p/w500$posterPath'
       : 'https://i.stack.imgur.com/GNhxO.png';

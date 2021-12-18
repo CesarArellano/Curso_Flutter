@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:movie_app/models/models.dart';
 import 'package:movie_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -7,8 +9,8 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movie = ModalRoute.of(context)?.settings.arguments.toString() ?? 'No movie';
-    debugPrint(movie);
+    final movie = ModalRoute.of(context)?.settings.arguments as Movie;
+
     return Scaffold(
       body: Scrollbar(
         radius: const Radius.circular(100),
@@ -19,12 +21,9 @@ class DetailsScreen extends StatelessWidget {
             _CustomAppBar(movie: movie),
             SliverList(
               delegate: SliverChildListDelegate([
-                const _PosterAndTitle(),
-                const _Overview(),
-                const _Overview(),
-                const _Overview(),
-                const _Overview(),
-                const CastingCards(),
+                _PosterAndTitle( movie: movie ),
+                _Overview( movie: movie ),
+                CastingCards( movie: movie ),
               ])
             ),
           ],
@@ -40,7 +39,7 @@ class _CustomAppBar extends StatelessWidget {
     required this.movie,
   }) : super(key: key);
 
-  final String movie;
+  final Movie movie;
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +56,15 @@ class _CustomAppBar extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           color: Colors.black12,
           child: Text(
-            movie,
-            style: const TextStyle(fontSize: 18)
+            movie.title ?? 'No title',
+            style: const TextStyle(fontSize: 18),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis
           ),
         ),
-        background: const FadeInImage(
-          placeholder: AssetImage('assets/images/loading.gif'),
-          image: AssetImage('assets/images/loading.gif'),
+        background: FadeInImage(
+          placeholder: const AssetImage('assets/images/loading.gif'),
+          image: NetworkImage( movie.fullPosterImg ),
           fit: BoxFit.cover,
         ),
       ),
@@ -72,8 +73,12 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
+  final Movie movie;
 
-  const _PosterAndTitle({Key? key}) : super(key: key);
+  const _PosterAndTitle({
+    Key? key,
+    required this.movie
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,39 +91,41 @@ class _PosterAndTitle extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: const FadeInImage(
+            child: FadeInImage(
               width: 100,
               height: 150,
-              placeholder: AssetImage('assets/images/loading.gif'),
-              image: AssetImage('assets/images/loading.gif'),
+              placeholder: const AssetImage('assets/images/loading.gif'),
+              image: NetworkImage( movie.fullPosterImg ),
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 15),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Movie Title',
-                style: textTheme.headline5,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              Text(
-                'Movie Original Title',
-                style: textTheme.subtitle2,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.star, color: Colors.yellow),
-                  const SizedBox(width: 5),
-                  Text('Promedio votos', style: textTheme.caption,)
-                ],
-              )
-
-            ],
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  movie.title ?? 'No title',
+                  style: textTheme.headline5,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  movie.originalTitle,
+                  style: textTheme.subtitle2,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.star, color: Colors.yellow),
+                    const SizedBox(width: 5),
+                    Text('${ movie.voteAverage }', style: textTheme.subtitle2,)
+                  ],
+                )
+          
+              ],
+            ),
           )
         ],
       ),
@@ -127,7 +134,12 @@ class _PosterAndTitle extends StatelessWidget {
 }
 
 class _Overview extends StatelessWidget {
-  const _Overview({Key? key}) : super(key: key);
+  final Movie movie;
+
+  const _Overview({
+    Key? key,
+    required this.movie,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +149,7 @@ class _Overview extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only( top: 20, right: 20, left: 20 ),
       child: Text(
-        'Dolor est pariatur amet exercitation aute. Magna nisi enim non in sit voluptate mollit incididunt eu proident laboris proident anim. Quis labore Lorem et proident deserunt.',
+        movie.overview,
         style: textTheme.subtitle1,
         textAlign: TextAlign.justify,
       ),

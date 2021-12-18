@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:movie_app/providers/movies_provider.dart';
 
 // Screens
 import 'package:movie_app/screens/screens.dart';
-import 'package:provider/provider.dart';
 
 void main() => runApp( const AppState() );
 

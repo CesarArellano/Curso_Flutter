@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/widgets/widgets.dart';
 
 class DetailsScreen extends StatelessWidget {
   
@@ -14,7 +15,12 @@ class DetailsScreen extends StatelessWidget {
           _CustomAppBar(movie: movie),
           SliverList(
             delegate: SliverChildListDelegate([
-              const _PosterAndTitle()
+              const _PosterAndTitle(),
+              const _Overview(),
+              const _Overview(),
+              const _Overview(),
+              const _Overview(),
+              const CastingCards(),
             ])
           ),
         ],
@@ -41,6 +47,7 @@ class _CustomAppBar extends StatelessWidget {
         centerTitle: true,
         titlePadding: const EdgeInsets.all(0),
         title: Container(
+          padding: const EdgeInsets.only(bottom: 16),
           width: double.infinity,
           alignment: Alignment.bottomCenter,
           color: Colors.black12,
@@ -60,6 +67,7 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class _PosterAndTitle extends StatelessWidget {
+
   const _PosterAndTitle({Key? key}) : super(key: key);
 
   @override
@@ -108,6 +116,25 @@ class _PosterAndTitle extends StatelessWidget {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class _Overview extends StatelessWidget {
+  const _Overview({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
+    return Container(
+      padding: const EdgeInsets.only( top: 20, right: 20, left: 20 ),
+      child: Text(
+        'Dolor est pariatur amet exercitation aute. Magna nisi enim non in sit voluptate mollit incididunt eu proident laboris proident anim. Quis labore Lorem et proident deserunt.',
+        style: textTheme.subtitle1,
+        textAlign: TextAlign.justify,
       ),
     );
   }

@@ -9,8 +9,9 @@ class MoviesProvider extends ChangeNotifier {
   final String _apiKey = '62e55e873b3d4db86782226591ef48ae';
   final String _language = 'es-ES';
 
+  List<Movie> onDisplayMovies = [];
+
   MoviesProvider() {
-    debugPrint('Hello');
     getNowPlayingMovies();
   }
 
@@ -22,6 +23,8 @@ class MoviesProvider extends ChangeNotifier {
     });
     final resp = await http.get(url);
     final nowPlayingResponse = NowPlayingResponse.fromJson( resp.body );
-    debugPrint(nowPlayingResponse.results.toString() );
+    onDisplayMovies = [ ...nowPlayingResponse.results ];
+
+    notifyListeners();
   }
 }

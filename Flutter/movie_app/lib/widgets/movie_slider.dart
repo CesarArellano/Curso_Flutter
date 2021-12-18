@@ -9,7 +9,7 @@ class MovieSlider extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
-      height: size.height * 0.32,
+      height: size.height * 0.34,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

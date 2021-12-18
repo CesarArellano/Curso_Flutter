@@ -10,20 +10,25 @@ class DetailsScreen extends StatelessWidget {
     final movie = ModalRoute.of(context)?.settings.arguments.toString() ?? 'No movie';
     debugPrint(movie);
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          _CustomAppBar(movie: movie),
-          SliverList(
-            delegate: SliverChildListDelegate([
-              const _PosterAndTitle(),
-              const _Overview(),
-              const _Overview(),
-              const _Overview(),
-              const _Overview(),
-              const CastingCards(),
-            ])
-          ),
-        ],
+      body: Scrollbar(
+        radius: const Radius.circular(100),
+        thickness: 6,
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            _CustomAppBar(movie: movie),
+            SliverList(
+              delegate: SliverChildListDelegate([
+                const _PosterAndTitle(),
+                const _Overview(),
+                const _Overview(),
+                const _Overview(),
+                const _Overview(),
+                const CastingCards(),
+              ])
+            ),
+          ],
+        ),
       )
     );
   }
@@ -89,7 +94,7 @@ class _PosterAndTitle extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(width: 10),
+          const SizedBox(width: 15),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -9,7 +9,7 @@ class DetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final movie = ModalRoute.of(context)?.settings.arguments as Movie;
+    final Movie movie = ModalRoute.of(context)?.settings.arguments as Movie;
 
     return Scaffold(
       body: Scrollbar(
@@ -22,6 +22,8 @@ class DetailsScreen extends StatelessWidget {
             SliverList(
               delegate: SliverChildListDelegate([
                 _PosterAndTitle( movie: movie ),
+                _Overview( movie: movie ),
+                _Overview( movie: movie ),
                 _Overview( movie: movie ),
                 CastingCards( movie: movie ),
               ])
@@ -64,7 +66,7 @@ class _CustomAppBar extends StatelessWidget {
         ),
         background: FadeInImage(
           placeholder: const AssetImage('assets/images/loading.gif'),
-          image: NetworkImage( movie.fullPosterImg ),
+          image: NetworkImage( movie.fullBackdropImg ),
           fit: BoxFit.cover,
         ),
       ),
@@ -108,8 +110,9 @@ class _PosterAndTitle extends StatelessWidget {
                   movie.title ?? 'No title',
                   style: textTheme.headline5,
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                  maxLines: 2,
                 ),
+                const SizedBox(height: 4),
                 Text(
                   movie.originalTitle,
                   style: textTheme.subtitle2,

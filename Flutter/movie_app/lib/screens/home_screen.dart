@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/providers/movies_provider.dart';
+import 'package:movie_app/search/search_delegate.dart';
 import 'package:movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -23,9 +24,7 @@ class HomeScreen extends StatelessWidget {
               tooltip: 'Búsqueda',
               splashRadius: 24,
               icon: const Icon( Icons.search ),
-              onPressed: () {
-                debugPrint('Search...');
-              }, 
+              onPressed: () => showSearch(context: context, delegate: MovieSearchDelegate() )
             ),
           ),
         ],

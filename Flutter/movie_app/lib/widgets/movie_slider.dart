@@ -80,6 +80,8 @@ class MoviePoster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    movie.heroId = 'movie-slider-${ movie.title }-${ movie.id }';
+
     return Container(
       margin: const EdgeInsets.symmetric( horizontal: 15 ),
       width: 130,
@@ -87,14 +89,17 @@ class MoviePoster extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () => Navigator.pushNamed(context, 'details', arguments: movie),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: FadeInImage(
-                placeholder: const AssetImage('assets/images/loading.gif'),
-                image: NetworkImage( movie.fullPosterImg ),
-                fit: BoxFit.cover,
-                width: 130,
-                height: 190,
+            child: Hero(
+              tag: movie.heroId!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: FadeInImage(
+                  placeholder: const AssetImage('assets/images/loading.gif'),
+                  image: NetworkImage( movie.fullPosterImg ),
+                  fit: BoxFit.cover,
+                  width: 130,
+                  height: 190,
+                ),
               ),
             ),
           ),

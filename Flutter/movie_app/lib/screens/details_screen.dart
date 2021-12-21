@@ -10,7 +10,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Movie movie = ModalRoute.of(context)?.settings.arguments as Movie;
-
+    debugPrint('Movie id: ${ movie.id }');
     return Scaffold(
       body: Scrollbar(
         radius: const Radius.circular(100),
@@ -25,7 +25,7 @@ class DetailsScreen extends StatelessWidget {
                 _Overview( movie: movie ),
                 _Overview( movie: movie ),
                 _Overview( movie: movie ),
-                CastingCards( movie: movie ),
+                CastingCards( movieId: movie.id ),
               ])
             ),
           ],

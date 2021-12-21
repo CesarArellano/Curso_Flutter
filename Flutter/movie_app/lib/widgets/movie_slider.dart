@@ -44,9 +44,9 @@ class _MovieSliderState extends State<MovieSlider> {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 15),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       width: double.infinity,
-      height: size.height * 0.34,
+      height: size.height * 0.35,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -61,7 +61,7 @@ class _MovieSliderState extends State<MovieSlider> {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemCount: widget.movies.length,
-              itemBuilder: ( _ , int i ) => MoviePoster( movie: widget.movies[i] ),
+              itemBuilder: ( _ , int i ) => MoviePoster( movie: widget.movies[i], title: widget.title ),
             ),
           ),
         ],
@@ -72,15 +72,17 @@ class _MovieSliderState extends State<MovieSlider> {
 
 class MoviePoster extends StatelessWidget {
   final Movie movie;
+  final String title;
 
   const MoviePoster({
     Key? key,
-    required this.movie
+    required this.movie,
+    required this.title,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    movie.heroId = 'movie-slider-${ movie.title }-${ movie.id }';
+    movie.heroId = 'movie-slider-$title-${ movie.title }-${ movie.id }';
 
     return Container(
       margin: const EdgeInsets.symmetric( horizontal: 15 ),

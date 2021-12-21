@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie_app/helpers/debouncer.dart';
 
 import 'package:movie_app/models/models.dart';
 import 'package:movie_app/models/search_response.dart';
@@ -12,14 +15,24 @@ class MoviesProvider extends ChangeNotifier {
 
   List<Movie> onDisplayMovies = [];
   List<Movie> popularMovies = [];
+  List<Movie> topRatedMovies = [];
+  List<Movie> upcomingMovies = [];
   
   Map<int, List<Cast>> movieCast = {};
 
-  int _page = 1;
+  final debouncer = Debouncer(duration:  const Duration( milliseconds:  500) );
+  final StreamController<List<Movie>> _suggestionStreamController = StreamController.broadcast();
+  Stream<List<Movie>> get suggestionsStream => _suggestionStreamController.stream;
+
+  int _popularPage = 1;
+  int _topRatedPage = 1;
+  int _upcomingPage = 1;
 
   MoviesProvider() {
     getNowPlayingMovies();
     getPopularMovies();
+    getTopRatedMovies();
+    getUpcomingMovies();
   }
 
   Future<String> getJsonData(String endpoint, [ int page = 1 ]) async {
@@ -30,7 +43,6 @@ class MoviesProvider extends ChangeNotifier {
     });
     
     final resp = await http.get(url);
-    debugPrint('Pidiendo info al server');
     return resp.body;
   }
 
@@ -42,10 +54,26 @@ class MoviesProvider extends ChangeNotifier {
   }
 
   void getPopularMovies() async {
-    final body = await getJsonData('3/movie/popular', _page);
-    final popularResponse = PopularResponse.fromJson( body );
+    final body = await getJsonData('3/movie/popular', _popularPage);
+    final popularResponse = MoviesResponse.fromJson( body );
     popularMovies = [ ...popularMovies, ...popularResponse.results ];
-    _page++;
+    _popularPage++;
+    notifyListeners();
+  }
+
+  void getTopRatedMovies() async {
+    final body = await getJsonData('3/movie/top_rated', _topRatedPage);
+    final topRatedResponse = MoviesResponse.fromJson( body );
+    topRatedMovies = [ ...topRatedMovies, ...topRatedResponse.results ];
+    _topRatedPage++;
+    notifyListeners();
+  }
+
+  void getUpcomingMovies() async {
+    final body = await getJsonData('3/movie/upcoming', _upcomingPage);
+    final upomingResponse = MoviesResponse.fromJson( body );
+    upcomingMovies = [ ...upcomingMovies, ...upomingResponse.results ];
+    _upcomingPage++;
     notifyListeners();
   }
 
@@ -71,5 +99,19 @@ class MoviesProvider extends ChangeNotifier {
     final resp = await http.get(url);
     final movies = SearchResponse.fromJson( resp.body );
     return movies.results!;
+  }
+
+  void getSuggestionsByQuery( String query ) {
+    debouncer.value = '';
+    debouncer.onValue = ( value ) async {
+      final results = await searchMovies(value);
+      _suggestionStreamController.add( results );
+    };
+
+    final timer = Timer.periodic( const Duration(milliseconds:  300), ( _ ) { 
+      debouncer.value = query;
+    });
+
+    Future.delayed( const Duration( milliseconds: 301) ).then( ( _ ) => timer.cancel());
   }
 }

@@ -27,7 +27,7 @@ class CardSwiper extends StatelessWidget {
     }
 
     return Container(
-      margin: const EdgeInsets.only(top: 20, bottom: 10),
+      margin: const EdgeInsets.symmetric(vertical: 20),
       width: double.infinity,
       height: size.height * 0.5,
       child: Swiper(

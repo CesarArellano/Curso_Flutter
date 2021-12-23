@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ListView1Screen extends StatelessWidget {
 
-  final options = const ['Megaman', 'Smash Bros', 'The Legend Of Zelda', 'PayDay2'];
   const ListView1Screen({Key? key}) : super(key: key);
+  final options = const ['Megaman', 'Smash Bros', 'The Legend Of Zelda', 'PayDay2'];
 
   @override
   Widget build(BuildContext context) {

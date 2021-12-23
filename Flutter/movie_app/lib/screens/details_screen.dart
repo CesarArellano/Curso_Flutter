@@ -43,6 +43,9 @@ class _CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    final titleMovie = ( movie.title!.length > 30 ) ? movie.title!.substring(0, 30) + '...' : movie.title;
+    
     return SliverAppBar(
       expandedHeight: 200,
       floating: false,
@@ -51,12 +54,12 @@ class _CustomAppBar extends StatelessWidget {
         centerTitle: true,
         titlePadding: const EdgeInsets.all(0),
         title: Container(
-          padding: const EdgeInsets.only(bottom: 16),
+          padding: const EdgeInsets.only(bottom: 16, left: 5, right: 5),
           width: double.infinity,
           alignment: Alignment.bottomCenter,
-          color: Colors.black12,
+          color: Colors.black.withOpacity(0.15),
           child: Text(
-            movie.title ?? 'No title',
+            titleMovie ?? 'No title',
             style: const TextStyle(fontSize: 18),
             maxLines: 1,
             overflow: TextOverflow.ellipsis

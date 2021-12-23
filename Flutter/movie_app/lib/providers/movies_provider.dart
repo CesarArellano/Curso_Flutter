@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:movie_app/helpers/debouncer.dart';
 
+import 'package:movie_app/helpers/debouncer.dart';
 import 'package:movie_app/models/models.dart';
-import 'package:movie_app/models/search_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
   
@@ -48,7 +47,7 @@ class MoviesProvider extends ChangeNotifier {
 
   void getNowPlayingMovies() async {
     final body = await getJsonData('3/movie/now_playing');
-    final nowPlayingResponse = NowPlayingResponse.fromJson( body );
+    final nowPlayingResponse = MoviesResponse.fromJson( body );
     onDisplayMovies = [ ...nowPlayingResponse.results ];
     notifyListeners();
   }
@@ -97,8 +96,8 @@ class MoviesProvider extends ChangeNotifier {
     });
     
     final resp = await http.get(url);
-    final movies = SearchResponse.fromJson( resp.body );
-    return movies.results!;
+    final movies = MoviesResponse.fromJson( resp.body );
+    return movies.results;
   }
 
   void getSuggestionsByQuery( String query ) {

@@ -43,8 +43,7 @@ class _MovieSliderState extends State<MovieSlider> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5),
+    return SizedBox(
       width: double.infinity,
       height: size.height * 0.35,
       child: Column(

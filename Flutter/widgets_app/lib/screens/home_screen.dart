@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: ( _, int i) {
           final menuOption = menuOptions[i];
           return ListTile(
-            leading: Icon( menuOption.icon ),
+            leading: Icon( menuOption.icon, color: Colors.indigo ),
             title: Text( menuOption.name ),
             onTap: () {
               Navigator.pushNamed(context, menuOption.route );

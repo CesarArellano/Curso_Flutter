@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:widgets_app/routes/app_routes.dart';
-import 'package:widgets_app/screens/alert_screen.dart';
+import 'package:widgets_app/theme/app_theme.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,16 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Widgets App',
       initialRoute: AppRoutes.initialRoute,
       routes: AppRoutes.routes,
-      onGenerateRoute: (settings) {
-        return MaterialPageRoute(
-          builder: ( _ ) => const AlertScreen()
-        );
-      },
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.indigo
-        )
-      ),
+      onGenerateRoute: AppRoutes.onGenerateRoute,
+      theme: AppTheme.lightTheme,
     );
   }
 }

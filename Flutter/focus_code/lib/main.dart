@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/providers/scan_history_provider.dart';
 import 'package:focus_code/providers/ui_provider.dart';
 
 import 'package:focus_code/routes/app_router.dart';
@@ -14,7 +15,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => UiProvider() )
+        ChangeNotifierProvider( create: (_) => UiProvider() ),
+        ChangeNotifierProvider( create: ( _ ) => ScanHistoryProvider() ),
       ],
       child: const MyApp(),
     );

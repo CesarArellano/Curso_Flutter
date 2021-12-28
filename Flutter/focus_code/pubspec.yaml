@@ -39,6 +39,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   google_maps_flutter: ^2.1.1
   url_launcher: ^6.0.17
+  path_provider: ^2.0.8
   
 dev_dependencies:
   flutter_test:

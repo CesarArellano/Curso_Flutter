@@ -35,9 +35,9 @@ class DBProvider {
         await db.execute('''
           CREATE TABLE Scans(
             id INTEGER PRIMARY KEY,
-            scanType TEXT,
-            scanValue TEXT,
-          )
+            scan_type TEXT,
+            scan_value TEXT
+          );
         ''');
       } 
     );
@@ -50,7 +50,7 @@ class DBProvider {
     
   //   final db = await database;
   //   final resp = await db?.rawInsert('''
-  //     INSERT INTO Scans( id, scanType, scanValue )
+  //     INSERT INTO Scans( id, scan_type, scan_value )
   //       VALUES( $id, $scanType, $scanValue )
   //   ''');
 
@@ -83,7 +83,7 @@ class DBProvider {
   Future<List<ScanModel>?> getScanByType(String type) async {
     final db = await database;
     final resp = await db!.rawQuery('''
-      SELECT * FROM Scans WHERE scanType = '$type'
+      SELECT * FROM Scans WHERE scan_type = '$type'
     ''');
     return resp.isNotEmpty
       ? resp.map((s) => ScanModel.fromJson( s) ).toList()

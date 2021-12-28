@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/providers/scan_history_provider.dart';
 import 'package:focus_code/providers/ui_provider.dart';
 
 import 'package:focus_code/screens/screens.dart';
@@ -39,11 +40,14 @@ class _HomeScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int currentIndex = Provider.of<UiProvider>(context).currentIndex;
+    final scanHistoryProvider = Provider.of<ScanHistoryProvider>(context, listen: false);
 
     switch( currentIndex ) {
       case 0:
+        scanHistoryProvider.loadScansByType('geo');
         return const MapHistoryScreen();
       case 1:
+        scanHistoryProvider.loadScansByType('http');
         return const WebHistoryScreen();
       default:
         return const MapHistoryScreen();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:focus_code/providers/scan_history_provider.dart';
 import 'package:focus_code/providers/ui_provider.dart';
 
@@ -16,12 +17,19 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Historial'),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only( right: 4 ),
-            child: IconButton(
-              splashRadius: 22,
-              icon: const Icon( Icons.delete_forever ),
-              onPressed: () {},
+          Visibility(
+            visible: Provider.of<ScanHistoryProvider>(context).scanHistory.isNotEmpty,
+            child: Padding(
+              padding: const EdgeInsets.only( right: 4 ),
+              child: IconButton(
+                tooltip: 'Borrar todo',
+                splashRadius: 22,
+                icon: const Icon( Icons.delete_forever ),
+                onPressed: () {
+                  Provider.of<ScanHistoryProvider>(context, listen: false)
+                    .deleteAllScans();
+                },
+              ),
             ),
           ),
         ],
@@ -41,6 +49,9 @@ class _HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final int currentIndex = Provider.of<UiProvider>(context).currentIndex;
     final scanHistoryProvider = Provider.of<ScanHistoryProvider>(context, listen: false);
+
+    // scanHistoryProvider.newScan('https://google.com.mx');
+    // scanHistoryProvider.newScan('geo:19.673361, -98.978361');
 
     switch( currentIndex ) {
       case 0:

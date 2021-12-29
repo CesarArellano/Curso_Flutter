@@ -6,7 +6,7 @@ class ScanHistoryProvider extends ChangeNotifier {
   List<ScanModel> scanHistory = [];
   String selectedType = 'http';
 
-  void newScan( String scanValue ) async {
+  Future<ScanModel> newScan( String scanValue ) async {
     final newScan = ScanModel(scanValue: scanValue );
     final id = await DBProvider.db.newScan(newScan);
     newScan.id = id;
@@ -15,6 +15,8 @@ class ScanHistoryProvider extends ChangeNotifier {
       scanHistory.add(newScan);
       notifyListeners();
     }
+
+    return newScan;
   }
 
   void loadScansByType( String type ) async {

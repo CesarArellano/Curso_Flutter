@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:focus_code/providers/db_provider.dart';
-// import 'package:url_launcher/url_launcher.dart';
+
+import 'package:focus_code/providers/scan_history_provider.dart';
 
 class ScanButton extends StatelessWidget {
   
@@ -16,17 +17,12 @@ class ScanButton extends StatelessWidget {
         final codeResp = await FlutterBarcodeScanner.scanBarcode("#673AB7", "Cancelar", true, ScanMode.QR);
         
         if( codeResp == '-1') return;
-
-        final newScan = ScanModel(scanValue: codeResp);
         
-        DBProvider.db.newScan(newScan);
+        final newScanModel = await Provider.of<ScanHistoryProvider>(context).newScan(codeResp);    
+        newScanModel.launchUrl(context);
         
       },
     );
   }
-
-  // void _launchURL( String url ) async {
-  //   if (!await launch( url )) throw 'Could not launch $url';
-  // }
 
 }

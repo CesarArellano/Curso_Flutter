@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:focus_code/providers/db_provider.dart';
 import 'package:focus_code/providers/scan_history_provider.dart';
-import 'package:provider/provider.dart';
 
 class ScanTiles extends StatelessWidget {
   final String scanType;
@@ -63,19 +64,31 @@ class ScansList extends StatelessWidget {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: scans.length,
-      itemBuilder: ( _, i ) => ListTile(
-        leading: Icon(
-          scanType == 'http'
-          ? Icons.home_outlined
-          : Icons.map_outlined,
-          color: Theme.of(context).primaryColor
+      itemBuilder: ( _, i ) => Dismissible(
+        key: UniqueKey(),
+        direction: DismissDirection.endToStart,
+        onDismissed: ( DismissDirection direction ) {
+          Provider.of<ScanHistoryProvider>(context, listen: false)
+            .deleteScanById( scans[i].id! );
+        },
+        background: Container(
+          padding: const EdgeInsets.only( right: 10 ),
+          child: const Icon( Icons.delete_outline_rounded, color: Colors.white ),
+          color: Colors.red[400],
+          alignment: Alignment.centerRight,
         ),
-        title: Text(scans[i].scanValue),
-        subtitle: Text(scans[i].id.toString()),
-        trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey),
-        onTap: () {
-          // launchURL(context, scans[i]);
-        }
+        child: ListTile(
+          leading: Icon(
+            scanType == 'http'
+            ? Icons.home_outlined
+            : Icons.map_outlined,
+            color: Theme.of(context).primaryColor
+          ),
+          title: Text(scans[i].scanValue),
+          subtitle: Text(scans[i].id.toString()),
+          trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey),
+          onTap: () => scans[i].launchUrl(context),
+        ),
       )
     );
   }

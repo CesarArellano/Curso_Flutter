@@ -51,9 +51,6 @@ class _HomeScreenBody extends StatelessWidget {
     final int currentIndex = Provider.of<UiProvider>(context).currentIndex;
     final scanHistoryProvider = Provider.of<ScanHistoryProvider>(context, listen: false);
 
-    // scanHistoryProvider.newScan('https://google.com.mx');
-    // scanHistoryProvider.newScan('geo:19.673361, -98.978361');
-
     switch( currentIndex ) {
       case 0:
         scanHistoryProvider.loadScansByType('geo');

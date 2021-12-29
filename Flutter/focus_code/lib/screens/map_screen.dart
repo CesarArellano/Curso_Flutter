@@ -60,6 +60,7 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: GoogleMap(
         mapType: mapType,
+        zoomControlsEnabled: false,
         myLocationButtonEnabled: false,
         initialCameraPosition: initPosition,
         markers: markers,

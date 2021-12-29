@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:focus_code/providers/db_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-  
+// import 'package:url_launcher/url_launcher.dart';
+
 class ScanButton extends StatelessWidget {
   
   const ScanButton({Key? key}) : super(key: key);
@@ -25,8 +25,8 @@ class ScanButton extends StatelessWidget {
     );
   }
 
-  void _launchURL( String url ) async {
-    if (!await launch( url )) throw 'Could not launch $url';
-  }
+  // void _launchURL( String url ) async {
+  //   if (!await launch( url )) throw 'Could not launch $url';
+  // }
 
 }

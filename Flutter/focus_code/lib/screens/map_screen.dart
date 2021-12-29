@@ -40,6 +40,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Maps'),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 4),

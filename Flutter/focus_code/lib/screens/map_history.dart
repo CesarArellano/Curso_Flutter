@@ -12,7 +12,12 @@ class MapHistoryScreen extends StatelessWidget {
     final scanHistoryProvider = Provider.of<ScanHistoryProvider>(context);
     final scanList = scanHistoryProvider.scanHistory;
 
-    // TODO: Si no hay elementos.
+    if( scanList.isEmpty ) {
+      return const Center(
+        child: CircularProgressIndicator.adaptive( backgroundColor: Colors.deepPurple )
+      );
+    }
+    
     return ListView.builder(
       itemCount: scanList.length,
       itemBuilder: ( _, int i) => ListTile(

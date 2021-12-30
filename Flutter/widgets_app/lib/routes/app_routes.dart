@@ -16,6 +16,7 @@ class AppRoutes {
     MenuOption( route:'animated-container', name: 'Animated Container', icon: Icons.add_box ),
     MenuOption( route:'inputs', name: 'Inputs', icon: Icons.input ),
     MenuOption( route:'slider', name: 'Slider && CheckBox', icon: Icons.slideshow ),
+    MenuOption( route:'listview-builder', name: 'Infinite Scroll', icon: Icons.stacked_bar_chart ),
   ];
 
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -27,7 +28,8 @@ class AppRoutes {
     'avatar': ( _ ) => const AvatarScreen(),
     'animated-container': ( _ ) => const AnimatedScreen(),
     'inputs': ( _ ) => const InputsScreen(),
-    'slider': ( _ ) => const SliderScreen()
+    'slider': ( _ ) => const SliderScreen(),
+    'listview-builder': ( _ ) => const ListViewBuilderScreen()
   };
 
   static Route<dynamic> onGenerateRoute ( RouteSettings settings) {

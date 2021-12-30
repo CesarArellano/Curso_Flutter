@@ -7,3 +7,4 @@ export 'package:widgets_app/screens/avatar_screen.dart';
 export 'package:widgets_app/screens/animated_screen.dart';
 export 'package:widgets_app/screens/inputs_screen.dart';
 export 'package:widgets_app/screens/slider_checkbox_screen.dart';
+export 'package:widgets_app/screens/listview_builder_screen.dart';

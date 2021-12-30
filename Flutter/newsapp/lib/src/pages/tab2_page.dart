@@ -10,6 +10,8 @@ import 'package:newsapp/src/services/news_service.dart';
 import 'package:newsapp/src/widgets/list_news.dart';
 
 class Tab2Page extends StatelessWidget {
+  const Tab2Page({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final newsService = Provider.of<NewsService>(context);
@@ -17,15 +19,15 @@ class Tab2Page extends StatelessWidget {
       child: Column(
         children: <Widget>[
           _ListCategory(),
-          Divider(height: 4.0, thickness: 2.0),
+          const Divider(height: 4.0, thickness: 2.0),
           (newsService.isLoading)
-          ? Expanded(
+          ? const Expanded(
             child: Center(child: CircularProgressIndicator())
           )
           : Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              child: NewsList(newsService.getArticlesSelectedCategory)
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: NewsList(news: newsService.getArticlesSelectedCategory)
             ),
           )
         ],
@@ -39,23 +41,23 @@ class _ListCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     final categories = Provider.of<NewsService>(context).categories;
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 90.0,
       child: ListView.builder(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         itemBuilder: (BuildContext context, int index) {
           final category = categories[index]; 
-          return Container(
+          return SizedBox(
             width: 105,
             child: Padding(
-              padding: EdgeInsets.only(top: 12.5),
+              padding: const EdgeInsets.only(top: 12.5),
               child: Column(
                 children: <Widget>[
                   _CategoryButton(category),
-                  SizedBox(height: 5.0),
+                  const SizedBox(height: 5.0),
                   Text('${category.name[0].toUpperCase()}${category.name.substring(1)}'),
                 ],
               ),
@@ -85,7 +87,7 @@ class _CategoryButton extends StatelessWidget {
       child: Container(
         width: 50,
         height: 50,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.white
         ),

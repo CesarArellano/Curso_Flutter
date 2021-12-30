@@ -12,6 +12,8 @@ class AppRoutes {
     MenuOption( route:'listview2', name: 'ListView 2', icon: Icons.list ),
     MenuOption( route:'card', name: 'Tarjetas - Cards', icon: Icons.switch_account_rounded ),
     MenuOption( route:'alert', name: 'Alertas - Alerts', icon: Icons.add_alert ),
+    MenuOption( route:'avatar', name: 'Circle Avatar', icon: Icons.supervised_user_circle ),
+    MenuOption( route:'animated-container', name: 'Animated Container', icon: Icons.add_box ),
   ];
 
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -20,6 +22,8 @@ class AppRoutes {
     'home': ( _ ) => const HomeScreen(),
     'listview1': ( _ ) => const ListView1Screen(),
     'listview2': ( _ ) => const ListView2Screen(),
+    'avatar': ( _ ) => const AvatarScreen(),
+    'animated-container': ( _ ) => const AnimatedScreen(),
   };
 
   static Route<dynamic> onGenerateRoute ( RouteSettings settings) {

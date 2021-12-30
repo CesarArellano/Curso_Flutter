@@ -18,7 +18,7 @@ class ScanTiles extends StatelessWidget {
     final widthDevice = MediaQuery.of(context).size.width;
     final scanListProvider = Provider.of<ScanHistoryProvider>(context);
     final scans = scanListProvider.scanHistory;
-    
+
     return ( scans.isNotEmpty ) 
       ? ScansList(scans: scans, scanType: scanType)
       : EmptyScans(widthDevice: widthDevice);
@@ -80,8 +80,8 @@ class ScansList extends StatelessWidget {
         child: ListTile(
           leading: Icon(
             scanType == 'http'
-            ? Icons.home_outlined
-            : Icons.map_outlined,
+              ? Icons.web_sharp
+              : Icons.map,
             color: Theme.of(context).primaryColor
           ),
           title: Text(scans[i].scanValue),

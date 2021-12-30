@@ -8,6 +8,6 @@ class MapHistoryScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return const ScanTiles( scanType: 'http' );
+    return const ScanTiles( scanType: 'map' );
   }
 }

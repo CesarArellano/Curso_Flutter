@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: const _HomeScreenBody(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const ScanButton(),
       bottomNavigationBar: const CustomNavigationBar()
     );
@@ -50,6 +50,9 @@ class _HomeScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final int currentIndex = Provider.of<UiProvider>(context).currentIndex;
     final scanHistoryProvider = Provider.of<ScanHistoryProvider>(context, listen: false);
+
+    // scanHistoryProvider.newScan('https://google.com.mx');
+    // scanHistoryProvider.newScan('geo:19.673361, -98.978361');
 
     switch( currentIndex ) {
       case 0:

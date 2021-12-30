@@ -12,19 +12,30 @@ class CustomNavigationBar extends StatelessWidget {
     final uiProvider = Provider.of<UiProvider>(context);
 
     return NavigationBar(
+      animationDuration: const Duration( milliseconds: 700 ),
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      height: 65,
       selectedIndex: uiProvider.currentIndex,
       onDestinationSelected: ( int index ) => uiProvider.currentIndex = index,
       destinations: const [
         NavigationDestination(
           icon: Icon( Icons.map_outlined ),
+          selectedIcon: Icon( Icons.map ), 
           label: 'Mapas',
         ),
         NavigationDestination(
-          icon: Icon( Icons.web_outlined ),
-          selectedIcon: Icon( Icons.web ), 
+          icon: Icon( Icons.web_asset ),
+          selectedIcon: Icon( Icons.web_rounded ), 
           label: 'Web',
+        ),
+        NavigationDestination(
+          icon: Icon( Icons.qr_code ),
+          selectedIcon: Icon( Icons.qr_code_sharp ), 
+          label: 'Generador',
+        ),
+        NavigationDestination(
+          icon: Icon( Icons.settings_outlined ),
+          selectedIcon: Icon( Icons.settings), 
+          label: 'Ajustes',
         ),
       ],
     );

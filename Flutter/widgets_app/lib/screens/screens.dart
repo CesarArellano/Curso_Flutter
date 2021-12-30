@@ -5,3 +5,4 @@ export 'package:widgets_app/screens/listview1_screen.dart';
 export 'package:widgets_app/screens/listview2_screen.dart';
 export 'package:widgets_app/screens/avatar_screen.dart';
 export 'package:widgets_app/screens/animated_screen.dart';
+export 'package:widgets_app/screens/inputs_screen.dart';

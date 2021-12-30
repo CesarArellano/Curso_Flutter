@@ -15,6 +15,7 @@ class AppRoutes {
     MenuOption( route:'avatar', name: 'Circle Avatar', icon: Icons.supervised_user_circle ),
     MenuOption( route:'animated-container', name: 'Animated Container', icon: Icons.add_box ),
     MenuOption( route:'inputs', name: 'Inputs', icon: Icons.input ),
+    MenuOption( route:'slider', name: 'Slider && CheckBox', icon: Icons.slideshow ),
   ];
 
   static Map<String, Widget Function(BuildContext)> routes = {
@@ -25,7 +26,8 @@ class AppRoutes {
     'listview2': ( _ ) => const ListView2Screen(),
     'avatar': ( _ ) => const AvatarScreen(),
     'animated-container': ( _ ) => const AnimatedScreen(),
-    'inputs': ( _ ) => const InputsScreen()
+    'inputs': ( _ ) => const InputsScreen(),
+    'slider': ( _ ) => const SliderScreen()
   };
 
   static Route<dynamic> onGenerateRoute ( RouteSettings settings) {

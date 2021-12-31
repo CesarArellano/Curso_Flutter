@@ -15,3 +15,7 @@ void takeScreenshot(ScreenshotController controller) async {
   await Share.shareFiles([file.path], text: "Te comparto el código que generé con Focus Code");
 
 }
+
+void shareContent(String content) async {
+  await Share.share(content);
+}

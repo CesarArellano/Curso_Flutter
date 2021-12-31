@@ -59,9 +59,8 @@ class EmptyScans extends StatelessWidget {
 class ScansList extends StatelessWidget {
   final List<ScanModel> scans;
   final String scanType;
-  final ScreenshotController _screenshotController = ScreenshotController();
   
-  ScansList({
+  const ScansList({
     Key? key, 
     required this.scans,
     required this.scanType,
@@ -100,41 +99,68 @@ class ScansList extends StatelessWidget {
           subtitle: Text(scans[i].id.toString()),
           trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey),
           onTap: () => scans[i].launchUrl(context),
-          onLongPress: () {
-            final codeValue = scans[i].scanValue;
-
-            showModalBottomSheet(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15)
-                )
-              ),
-              context: context,
-              builder: ( _ ) => Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 10, bottom: 20),
-                    width: 50,
-                    child: const Divider(thickness: 4, height: 10)
-                  ),
-                  CustomQRImage(
-                    screenshotController: _screenshotController,
-                    qrValue: codeValue,
-                  ),
-                  const SizedBox(height: 20),
-                  CustomButton(
-                    title: 'Compartir código QR',
-                    onPressed: () => takeScreenshot( _screenshotController ),
-                  ),
-                  const SizedBox(height: 40),
-                ],
-              )
-            );
-          },
+          onLongPress: () => _showModal( context, scans[i].scanValue )
         ),
       )
+    );
+  }
+
+  void _showModal(BuildContext context, String codeValue) {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15)
+        )
+      ),
+      context: context,
+      builder: ( _ ) => _ModalContent( codeValue: codeValue )
+    );
+  }
+}
+
+class _ModalContent extends StatelessWidget {
+  
+  final String codeValue;
+  final ScreenshotController _screenshotController = ScreenshotController();
+  
+  _ModalContent({
+    Key? key,
+    required this.codeValue
+  }) : super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 10, bottom: 20),
+          width: 50,
+          child: const Divider(thickness: 4, height: 10)
+        ),
+        CustomQRImage(
+          screenshotController: _screenshotController,
+          qrValue: codeValue,
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomButton(
+              title: 'Compartir código',
+              onPressed: () => takeScreenshot( _screenshotController ),
+            ),
+            const SizedBox(width: 10),
+            CustomButton(
+            title: 'Compartir contenido',
+            onPressed: () => shareContent( codeValue ),
+          ),
+          ],
+        ),
+        const SizedBox(height: 35),
+      ],
     );
   }
 }

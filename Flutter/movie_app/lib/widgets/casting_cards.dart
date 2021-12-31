@@ -31,7 +31,7 @@ class CastingCards extends StatelessWidget {
 
         return SizedBox(
           width: double.infinity,
-          height: 260,
+          height: 230,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -65,7 +65,7 @@ class _CastCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       padding: const EdgeInsets.symmetric( horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

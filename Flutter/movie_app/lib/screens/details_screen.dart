@@ -29,7 +29,7 @@ class DetailsScreen extends StatelessWidget {
                 _Overview( movie: movie ),
                 _MoreDetails( movieId: movie.id ),
                 CastingCards( movieId: movie.id ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
               ])
             ),
           ],
@@ -229,7 +229,7 @@ class _MoreDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const Text('Detalles', style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold),),
+              const Text('Detalles', style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 5),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -246,6 +246,9 @@ class _MoreDetails extends StatelessWidget {
               Text('Presupuesto: $budget', style: textTheme.subtitle2),
               const SizedBox(height: 5),
               Text('Ingresos: $revenue', style: textTheme.subtitle2),
+              const SizedBox(height: 10),
+              const Text('Actores', style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 5),
             ],
           ),
         );

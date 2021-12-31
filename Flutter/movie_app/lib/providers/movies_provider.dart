@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:movie_app/helpers/debouncer.dart';
 import 'package:movie_app/models/models.dart';
+import 'package:movie_app/models/movie_full_response.dart';
 
 class MoviesProvider extends ChangeNotifier {
   
@@ -18,6 +19,7 @@ class MoviesProvider extends ChangeNotifier {
   List<Movie> upcomingMovies = [];
   
   Map<int, List<Cast>> movieCast = {};
+  Map<int, MovieFullResponse> movieDetails = {};
 
   final debouncer = Debouncer(duration:  const Duration( milliseconds:  500) );
   final StreamController<List<Movie>> _suggestionStreamController = StreamController.broadcast();
@@ -86,6 +88,17 @@ class MoviesProvider extends ChangeNotifier {
     movieCast[movieId] = creditsResponse.cast ?? [];
 
     return movieCast[movieId]!;
+  }
+
+  Future<MovieFullResponse> getMovieDetails(int movieId) async {
+
+    if( movieDetails.containsKey( movieId ) ) return movieDetails[movieId]!;
+
+    final body = await getJsonData('3/movie/$movieId');
+    final movieDetailsResponse = MovieFullResponse.fromJson( body );
+    movieDetails[movieId] = movieDetailsResponse;
+    
+    return movieDetailsResponse;
   }
 
   Future<List<Movie>> searchMovies(String query) async {

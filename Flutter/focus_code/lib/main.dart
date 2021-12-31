@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/user_prefs/user_preferences.dart';
 
 import 'package:provider/provider.dart';
 
@@ -7,7 +8,11 @@ import 'package:focus_code/providers/ui_provider.dart';
 
 import 'package:focus_code/routes/app_router.dart';
 
-void main() => runApp( const AppState() );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences.init();
+  runApp( const AppState() );
+}
 
 class AppState extends StatelessWidget {
   const AppState({Key? key}) : super(key: key);
@@ -16,7 +21,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => UiProvider() ),
+        
+        ChangeNotifierProvider( create: (_) => UiProvider( isDarkmode: UserPreferences.isDarkMode ) ),
         ChangeNotifierProvider( create: ( _ ) => ScanHistoryProvider() ),
       ],
       child: const MyApp(),

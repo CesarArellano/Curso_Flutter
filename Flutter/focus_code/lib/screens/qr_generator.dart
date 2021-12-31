@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart' show ScreenshotController;
+
 import 'package:focus_code/theme/app_theme.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:share/share.dart';
+import 'package:focus_code/widgets/widgets.dart';
+import 'package:focus_code/helpers/helpers.dart';
   
 class QrGenerator extends StatefulWidget {
   
@@ -37,9 +35,9 @@ class _QrGeneratorState extends State<QrGenerator> {
               _buttonsContainer(),
               const SizedBox( height: 20 ),
               if( _isGeneratedQR )
-                _QRImage(
+                CustomQRImage(
                   screenshotController: _screenshotController,
-                  inputQRTextCtrl: _inputQRTextCtrl,
+                  qrValue: _inputQRTextCtrl.text,
                 )
               else
                 Image.asset(
@@ -84,14 +82,14 @@ class _QrGeneratorState extends State<QrGenerator> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _GeneratorButton(
+        CustomButton(
           title: 'Generar código',
           onPressed: _generateCode
         ),
         const SizedBox( width: 10 ),
-        _GeneratorButton(
+        CustomButton(
           title: 'Compartir código',
-          onPressed: _isGeneratedQR ? _takeScreenshot : null,
+          onPressed: _isGeneratedQR ? () => takeScreenshot( _screenshotController ) : null,
         ),
       ],
     );
@@ -111,79 +109,4 @@ class _QrGeneratorState extends State<QrGenerator> {
     );
   }
 
-  void _takeScreenshot() async {
-    
-    final imageFile = await _screenshotController.capture();
-    
-    if( imageFile == null ) return;
-
-    String tempPath = (await getTemporaryDirectory()).path;
-    File file = File('$tempPath/image.png');
-    await file.writeAsBytes(imageFile);
-    await Share.shareFiles([file.path], text: "Te comparto el código que generé con Focus Code");
-
-  }
-}
-
-
-  
-
-class _QRImage extends StatelessWidget {
-  const _QRImage({
-    Key? key,
-    required ScreenshotController screenshotController,
-    required TextEditingController inputQRTextCtrl,
-  }) : _screenshotController = screenshotController, _inputQRTextCtrl = inputQRTextCtrl, super(key: key);
-
-  final ScreenshotController _screenshotController;
-  final TextEditingController _inputQRTextCtrl;
-
-  @override
-  Widget build(BuildContext context) {
-    
-    final deviceWidth = MediaQuery.of(context).size.width;
-
-    return Screenshot(
-      controller: _screenshotController,
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: const <BoxShadow>[
-            BoxShadow(
-              blurRadius: 10,
-              color: Colors.black12
-            )
-          ]
-        ),
-        child: QrImage(
-          data: _inputQRTextCtrl.text,
-          size: deviceWidth * 0.65,
-        ),
-      ),
-    );
-  }
-}
-
-class _GeneratorButton extends StatelessWidget {
-  final String title;
-  final VoidCallback? onPressed;
-
-  const _GeneratorButton({
-    Key? key,
-    required this.title,
-    this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      color: AppTheme.primaryColor,
-      disabledColor: Colors.grey,
-      child: Text(title, style: const TextStyle( color: Colors.white ),),
-      onPressed: onPressed,
-    );
-  }
 }

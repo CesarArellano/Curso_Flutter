@@ -144,7 +144,7 @@ class _PosterAndTitle extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    if( !movie.adult )
+                    if( movie.adult )
                       const Chip(
                         backgroundColor: Colors.red,
                         label: Text('+18', style: chipTextStyle )

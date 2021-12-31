@@ -69,7 +69,7 @@ class _MapScreenState extends State<MapScreen> {
         }
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.layers),
+        child: const Icon(Icons.layers, color: Colors.white ),
         onPressed: () {
           mapType = ( mapType == MapType.normal ) ? MapType.satellite : MapType.normal;
           setState(() {});

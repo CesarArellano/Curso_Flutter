@@ -9,17 +9,20 @@ import 'package:provider/provider.dart';
   
 class HomeScreen extends StatelessWidget {
   
-  const HomeScreen({Key? key}) : super(key: key);
+  final List<String> appBarTitles = ['Historial Mapas', 'Historial Web', 'Generador QR', 'Ajustes'];
+  
+  HomeScreen({Key? key}) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+    int currentIndex = Provider.of<UiProvider>(context).currentIndex;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Historial'),
+        title: Text( appBarTitles[currentIndex] ),
         centerTitle: true,
         actions: [
           Visibility(
-            visible: Provider.of<ScanHistoryProvider>(context).scanHistory.isNotEmpty,
+            visible: (currentIndex == 0 || currentIndex == 1) && Provider.of<ScanHistoryProvider>(context).scanHistory.isNotEmpty,
             child: Padding(
               padding: const EdgeInsets.only( right: 4 ),
               child: IconButton(
@@ -36,7 +39,7 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: const _HomeScreenBody(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const ScanButton(),
       bottomNavigationBar: const CustomNavigationBar()
     );
@@ -61,6 +64,10 @@ class _HomeScreenBody extends StatelessWidget {
       case 1:
         scanHistoryProvider.loadScansByType('http');
         return const WebHistoryScreen();
+      case 2:
+        return const QrGenerator();
+      case 3:
+        return const Settings();
       default:
         return const MapHistoryScreen();
     }

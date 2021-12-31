@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/providers/ui_provider.dart';
+import 'package:focus_code/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -61,6 +63,8 @@ class ScansList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<UiProvider>(context).appThemeData;
+
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: scans.length,
@@ -82,7 +86,9 @@ class ScansList extends StatelessWidget {
             scanType == 'http'
               ? Icons.web_sharp
               : Icons.map,
-            color: Theme.of(context).primaryColor
+            color: (currentTheme == AppTheme.lightTheme) 
+              ? AppTheme.primaryColor
+              : Colors.white
           ),
           title: Text(scans[i].scanValue),
           subtitle: Text(scans[i].id.toString()),

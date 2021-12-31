@@ -6,13 +6,13 @@ class AppRouter {
   static String initialRoute = 'home';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    'home': ( _ ) => const HomeScreen(),
+    'home': ( _ ) => HomeScreen(),
     'map': ( _ ) => const MapScreen(),
   };
 
   static Route<dynamic> onGenerateRoute( RouteSettings settings ) {
     return MaterialPageRoute(
-      builder: (_) => const HomeScreen()
+      builder: (_) => HomeScreen()
     );
   }
 }

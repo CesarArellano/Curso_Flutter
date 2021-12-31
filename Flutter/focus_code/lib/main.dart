@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
 import 'package:focus_code/providers/scan_history_provider.dart';
 import 'package:focus_code/providers/ui_provider.dart';
 
 import 'package:focus_code/routes/app_router.dart';
-import 'package:focus_code/theme/app_theme.dart';
-import 'package:provider/provider.dart';
 
 void main() => runApp( const AppState() );
 
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRouter.initialRoute,
       routes: AppRouter.routes,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      theme: AppTheme.lightTheme,
+      theme: Provider.of<UiProvider>(context).appThemeData,
     );
   }
 }

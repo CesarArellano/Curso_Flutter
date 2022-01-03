@@ -25,11 +25,13 @@ class _QrGeneratorState extends State<QrGenerator> {
     final deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all( 15 ),
+      body: Container(
+        margin: const EdgeInsets.symmetric( horizontal: 20 ),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
+              const SizedBox( height: 20 ),
               _qrTextField(),
               const SizedBox( height: 20 ),
               _buttonsContainer(),
@@ -47,7 +49,7 @@ class _QrGeneratorState extends State<QrGenerator> {
                 )
             ],
           ),
-        )
+        ),
       ),
     );
   }

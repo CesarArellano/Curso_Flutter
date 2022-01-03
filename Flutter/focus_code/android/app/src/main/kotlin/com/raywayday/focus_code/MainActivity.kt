@@ -1,4 +1,4 @@
-package com.example.focus_code
+package com.raywayday.focus_code
 
 import io.flutter.embedding.android.FlutterActivity
 

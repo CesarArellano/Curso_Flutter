@@ -2,6 +2,8 @@
     package="com.raywayday.focus_code">
     
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Permissions options for the `camera` group -->
+    <uses-permission android:name="android.permission.CAMERA"/>
     
     <application
         android:label="Focus Code"

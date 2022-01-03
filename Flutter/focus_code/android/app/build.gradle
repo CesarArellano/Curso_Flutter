@@ -53,7 +53,7 @@ android {
         applicationId "com.raywayday.focus_code"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
-        versionCode 1
+        versionCode 3
         versionName '1.0.0'
     }
 

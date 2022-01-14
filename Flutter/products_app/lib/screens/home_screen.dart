@@ -14,9 +14,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: ListView.builder(
         itemCount: 3,
-        itemBuilder: ( _, int index) {
-          return const ProductCard();
-        }
+        itemBuilder: ( _, int index) => const ProductCard()
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Agregar producto',

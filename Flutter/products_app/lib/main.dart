@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:products_app/providers/login_form_provider.dart';
+import 'package:products_app/screens/product_screen.dart';
 import 'package:products_app/screens/screens.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'login': ( _ ) => const LoginScreen(),
           'home': ( _ ) => const HomeScreen(),
+          'product': ( _ ) => const ProductScreen(),
         },
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.grey[300],

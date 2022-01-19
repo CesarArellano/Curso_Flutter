@@ -12,40 +12,43 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: AuthBackground(
-        child: SizedBox(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: size.height * 0.28),
-                CardContainer(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 10),
-                      Text('Login', style: Theme.of(context).textTheme.headline4),
-                      const SizedBox(height: 15),
-                      const _LoginForm()
-                    ],
+    return ChangeNotifierProvider(
+      create: ( _ ) => LoginFormProvider(),
+      child: Scaffold(
+        body: AuthBackground(
+          child: SizedBox(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: size.height * 0.28),
+                  CardContainer(
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text('Login', style: Theme.of(context).textTheme.headline4),
+                        const SizedBox(height: 15),
+                        const _LoginForm()
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 30),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10) ),
-                    primary: Colors.deepPurple
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text('Crear una cuenta', style: TextStyle( color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w400 )),
-                  ),
-                  onPressed: (){},
-                )
-              ],
+                  const SizedBox(height: 30),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10) ),
+                      primary: Colors.deepPurple
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Crear una cuenta', style: TextStyle( color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w400 )),
+                    ),
+                    onPressed: (){},
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
 }

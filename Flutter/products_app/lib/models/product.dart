@@ -2,12 +2,14 @@ import 'dart:convert';
 
 class Product {
   Product({
+    this.id,
     this.fotoUrl,
     required this.disponible,
     required this.titulo,
     required this.valor,
   });
 
+  String? id;
   bool disponible;
   String? fotoUrl;
   String titulo;
@@ -30,4 +32,13 @@ class Product {
     "titulo": titulo,
     "valor": valor,
   };
+
+  Product copy() => Product( // Como todo en Dart se pasa por referencia, necesitamos hacer una copia.
+    id: id,
+    disponible: disponible,
+    fotoUrl: fotoUrl,
+    titulo: titulo,
+    valor: valor
+  );
+  
 }

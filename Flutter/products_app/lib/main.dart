@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:products_app/providers/login_form_provider.dart';
-import 'package:products_app/providers/product_provider.dart';
-import 'package:products_app/screens/product_screen.dart';
-import 'package:products_app/screens/screens.dart';
+
 import 'package:provider/provider.dart';
+
+import 'package:products_app/providers/product_provider.dart';
+import 'package:products_app/screens/screens.dart';
 
 void main() => runApp( const MyApp() );
 
@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => LoginFormProvider() ),
         ChangeNotifierProvider( create: ( _ ) => ProductProvider() )
       ],
       child: MaterialApp(

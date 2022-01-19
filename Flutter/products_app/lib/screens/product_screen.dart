@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:products_app/models/models.dart';
 import 'package:products_app/helpers/card_decoration.dart';
+import 'package:products_app/providers/product_provider.dart';
 import 'package:products_app/ui/input_decorations.dart';
 import 'package:products_app/widgets/product_image.dart';
+import 'package:provider/provider.dart';
 
 
 class ProductScreen extends StatelessWidget {
@@ -11,6 +15,8 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Product product = Provider.of<ProductProvider>(context).selectedProduct;
+    
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -19,7 +25,7 @@ class ProductScreen extends StatelessWidget {
             children: [
               Stack(
                 children: [
-                  const ProductImage(),
+                  ProductImage( urlProduct: product.fotoUrl ),
                   Positioned(
                     top: 60,
                     left: 20,
@@ -39,7 +45,7 @@ class ProductScreen extends StatelessWidget {
                   ),
                 ]
               ),
-              const _ProductForm()
+              _ProductForm( product: product )
             ],
           ),
         )
@@ -49,8 +55,10 @@ class ProductScreen extends StatelessWidget {
 }
 
 class _ProductForm extends StatelessWidget {
+  final Product product;
   const _ProductForm({
     Key? key,
+    required this.product,
   }) : super(key: key);
 
   @override

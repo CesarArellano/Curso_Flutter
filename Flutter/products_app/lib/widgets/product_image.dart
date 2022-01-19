@@ -10,22 +10,26 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Colors.black,
       width: double.infinity,
       height: 450,
-      child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(20),
-          topLeft: Radius.circular(20)
-        ),
-        child: urlProduct == null
-          ? Image.asset('assets/images/no-image.png', fit: BoxFit.cover)
-          : FadeInImage(
-            placeholder: const AssetImage('assets/images/jar-loading.gif'),
-            image: NetworkImage(urlProduct!),
-            fit: BoxFit.cover,
-            imageErrorBuilder: ( _, __, ___ ) => Image.asset('assets/images/no-image.png', fit: BoxFit.cover),
+      child: Opacity(
+        opacity: 0.9,
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20)
           ),
+          child: urlProduct == null
+            ? Image.asset('assets/images/no-image.png', fit: BoxFit.cover)
+            : FadeInImage(
+              placeholder: const AssetImage('assets/images/jar-loading.gif'),
+              image: NetworkImage(urlProduct!),
+              fit: BoxFit.cover,
+              imageErrorBuilder: ( _, __, ___ ) => Image.asset('assets/images/no-image.png', fit: BoxFit.cover),
+            ),
+        ),
       ),
     );
   }

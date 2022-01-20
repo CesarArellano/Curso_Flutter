@@ -80,7 +80,7 @@ class _ProductScreenBody extends StatelessWidget {
         onPressed: () async {
           FocusScope.of(context).unfocus();
           if( !productForm.validateForm() ) return;
-          await productProvider.updateProduct(product);
+          await productProvider.saveOrCreateProduct(product);
         },
       ),
     );

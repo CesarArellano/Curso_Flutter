@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:products_app/models/models.dart';
 import 'package:provider/provider.dart';
 
 import 'package:products_app/providers/product_provider.dart';
@@ -39,7 +40,14 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         tooltip: 'Agregar producto',
         child: const Icon( Icons.add ),
-        onPressed: (){},
+        onPressed: (){
+          productProvider.selectedProduct = Product(
+            disponible: true,
+            titulo: '',
+            valor: 0.0
+          );
+          Navigator.pushNamed(context, 'product');
+        },
       ),
     );
   }

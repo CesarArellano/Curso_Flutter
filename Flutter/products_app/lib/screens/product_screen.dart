@@ -43,67 +43,68 @@ class _ProductScreenBody extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  ProductImage( urlProduct: product.fotoUrl ),
-                  Container(
-                    width: double.infinity,
-                    height: 450,
-                    decoration: const BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        topLeft: Radius.circular(20)
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    ProductImage( urlProduct: product.fotoUrl ),
+                    Container(
+                      width: double.infinity,
+                      height: 450,
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.2),
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20)
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 60,
-                    left: 20,
-                    child: IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: const Icon( Icons.arrow_back_ios, color: Colors.white, size: 30 )
+                    Positioned(
+                      top: 60,
+                      left: 20,
+                      child: IconButton(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon( Icons.arrow_back_ios, color: Colors.white, size: 30 )
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 60,
-                    right: 20,
-                    child: IconButton( 
-                      onPressed: () async {
-                        final picker = ImagePicker();
-                        // Capture a photo
-                        final XFile? file = await picker.pickImage(
-                          source: ImageSource.gallery,
-                          imageQuality: 100
-                        );
-
-                        if( file == null ) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text('El usuario no tomó ninguna foto'),
-                            )
+                    Positioned(
+                      top: 60,
+                      right: 20,
+                      child: IconButton( 
+                        onPressed: () async {
+                          final picker = ImagePicker();
+                          // Capture a photo
+                          final XFile? file = await picker.pickImage(
+                            source: ImageSource.camera,
+                            imageQuality: 100
                           );
-                          return;
-                        }
-                        
-                        productProvider.updateSelectedProductImage(file.path);
-                      },
-                      icon: const Icon( Icons.camera_alt_outlined, color: Colors.white, size: 35, )
+        
+                          if( file == null ) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text('El usuario no tomó ninguna foto'),
+                              )
+                            );
+                            return;
+                          }
+                          
+                          productProvider.updateSelectedProductImage(file.path);
+                        },
+                        icon: const Icon( Icons.camera_alt_outlined, color: Colors.white, size: 35, )
+                      ),
                     ),
-                  ),
-                ]
-              ),
-              const _ProductForm()
-            ],
+                  ]
+                ),
+                const _ProductForm()
+              ],
+            ),
           ),
         )
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         tooltip: 'Guardar',
         child: productProvider.isSaving 

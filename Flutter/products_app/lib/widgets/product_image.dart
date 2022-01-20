@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class ProductImage extends StatelessWidget {
@@ -10,27 +12,36 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
+    return SizedBox(
       width: double.infinity,
       height: 450,
-      child: Opacity(
-        opacity: 0.9,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20)
-          ),
-          child: urlProduct == null
-            ? Image.asset('assets/images/no-image.png', fit: BoxFit.cover)
-            : FadeInImage(
-              placeholder: const AssetImage('assets/images/jar-loading.gif'),
-              image: NetworkImage(urlProduct!),
-              fit: BoxFit.cover,
-              imageErrorBuilder: ( _, __, ___ ) => Image.asset('assets/images/no-image.png', fit: BoxFit.cover),
-            ),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20)
         ),
+        child: getImage( urlProduct ),
       ),
+    );
+  }
+
+  Widget getImage(String? urlProduct) {
+    if( urlProduct == null ) {
+      return Image.asset('assets/images/no-image.png', fit: BoxFit.cover);
+    }
+
+    if( urlProduct.startsWith('http') ) {
+      return FadeInImage(
+        placeholder: const AssetImage('assets/images/jar-loading.gif'),
+        image: NetworkImage(urlProduct),
+        fit: BoxFit.cover,
+        imageErrorBuilder: ( _, __, ___ ) => Image.asset('assets/images/no-image.png', fit: BoxFit.cover),
+      );
+    }
+
+    return Image.file(
+      File( urlProduct ),
+      fit: BoxFit.cover,
     );
   }
 }

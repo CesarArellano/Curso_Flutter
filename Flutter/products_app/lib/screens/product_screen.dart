@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:provider/provider.dart';
 import 'package:products_app/providers/product_form_provider.dart';
@@ -49,10 +50,21 @@ class _ProductScreenBody extends StatelessWidget {
               Stack(
                 children: [
                   ProductImage( urlProduct: product.fotoUrl ),
+                  Container(
+                    width: double.infinity,
+                    height: 450,
+                    decoration: const BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(20),
+                        topLeft: Radius.circular(20)
+                      ),
+                    ),
+                  ),
                   Positioned(
                     top: 60,
                     left: 20,
-                    child: IconButton( 
+                    child: IconButton(
                       onPressed: () => Navigator.pop(context),
                       icon: const Icon( Icons.arrow_back_ios, color: Colors.white, size: 30 )
                     ),
@@ -61,14 +73,32 @@ class _ProductScreenBody extends StatelessWidget {
                     top: 60,
                     right: 20,
                     child: IconButton( 
-                      onPressed: () {
+                      onPressed: () async {
+                        final picker = ImagePicker();
+                        // Capture a photo
+                        final XFile? file = await picker.pickImage(
+                          source: ImageSource.gallery,
+                          imageQuality: 100
+                        );
+
+                        if( file == null ) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text('El usuario no tomó ninguna foto'),
+                            )
+                          );
+                          return;
+                        }
+                        
+                        productProvider.updateSelectedProductImage(file.path);
                       },
                       icon: const Icon( Icons.camera_alt_outlined, color: Colors.white, size: 35, )
                     ),
                   ),
                 ]
               ),
-              _ProductForm( product: product )
+              const _ProductForm()
             ],
           ),
         )
@@ -76,11 +106,23 @@ class _ProductScreenBody extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         tooltip: 'Guardar',
-        child: const Icon( Icons.save_alt_outlined ),
-        onPressed: () async {
-          FocusScope.of(context).unfocus();
-          if( !productForm.validateForm() ) return;
-          await productProvider.saveOrCreateProduct(product);
+        child: productProvider.isSaving 
+          ? const CircularProgressIndicator( color: Colors.white )
+          : const Icon( Icons.save_alt_outlined ),
+        onPressed: productProvider.isSaving
+          ? null
+          : () async {
+            FocusScope.of(context).unfocus();
+
+            if( !productForm.validateForm() ) return;
+
+            final String? imageUrl = await productProvider.uploadImage();
+            
+            if( imageUrl != null ) {
+              productForm.product.fotoUrl = imageUrl;
+          }
+
+          await productProvider.saveOrCreateProduct( productForm.product );
         },
       ),
     );
@@ -88,15 +130,12 @@ class _ProductScreenBody extends StatelessWidget {
 }
 
 class _ProductForm extends StatelessWidget {
-  final Product product;
-  const _ProductForm({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+  const _ProductForm({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final productForm = Provider.of<ProductFormProvider>(context);
+    final product = productForm.product;
 
     return Container(
       width: double.infinity,

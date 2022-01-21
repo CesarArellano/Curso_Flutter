@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:products_app/models/models.dart';
+import 'package:products_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:products_app/providers/product_provider.dart';
 
 import 'package:products_app/screens/screens.dart';
 import 'package:products_app/widgets/widgets.dart';
-
 
 class HomeScreen extends StatelessWidget {
 
@@ -23,6 +23,20 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Products'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only( right: 5 ),
+            child: IconButton(
+              splashRadius: 24,
+              icon: const Icon( Icons.logout ),
+              onPressed: () async {
+                final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                await authProvider.logOut();
+                Navigator.pushReplacementNamed(context, 'login');
+              },
+            )
+          ),
+        ],
       ),
       body: ListView.builder(
         physics: const BouncingScrollPhysics(),

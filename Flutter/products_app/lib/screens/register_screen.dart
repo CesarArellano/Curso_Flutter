@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:products_app/helpers/snack_alert.dart';
 import 'package:products_app/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
+
 import 'package:products_app/providers/login_form_provider.dart';
 import 'package:products_app/ui/input_decorations.dart';
 import 'package:products_app/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
-                        Text('Login', style: Theme.of(context).textTheme.headline4),
+                        Text('Registro', style: Theme.of(context).textTheme.headline4),
                         const SizedBox(height: 15),
                         const _LoginForm()
                       ],
@@ -41,9 +42,9 @@ class LoginScreen extends StatelessWidget {
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text('Crear una cuenta', style: TextStyle( color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w400 )),
+                      child: Text('¿Ya tienes cuenta?', style: TextStyle( color: Colors.black87, fontSize: 18, fontWeight: FontWeight.w400 )),
                     ),
-                    onPressed: () => Navigator.pushReplacementNamed(context, 'register'),
+                    onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
                   )
                 ],
               ),
@@ -126,11 +127,12 @@ class _LoginForm extends StatelessWidget {
                   FocusScope.of(context).unfocus();
 
                   if ( !loginForm.validateForm() ) return;
-                  
                   final authProvider = Provider.of<AuthProvider>(context, listen: false);
-
+                  
                   loginForm.isLoading = true;
-                  final String? errorMsg = await authProvider.login(loginForm.email, loginForm.password);
+
+                  final String? errorMsg = await authProvider.createUser(loginForm.email, loginForm.password);
+                  
                   loginForm.isLoading = false;
 
                   if( errorMsg != null ) {

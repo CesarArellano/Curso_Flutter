@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:products_app/models/models.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,6 +16,8 @@ class ProductProvider extends ChangeNotifier {
   bool isLoading = true;
   bool isSaving = false;
   
+  final storage = const FlutterSecureStorage();
+  
   ProductProvider() {
     loadProducts();
   }
@@ -24,7 +27,10 @@ class ProductProvider extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    final uri = Uri.https( _baseUrl, 'productos.json');
+    final uri = Uri.https( _baseUrl, 'productos.json', {
+      'auth': await storage.read(key: 'token') ?? '',
+    });
+
     final resp = await http.get( uri );
     final Map<String, dynamic>? decodedData = json.decode(resp.body);
     if( decodedData == null ) return;
@@ -57,7 +63,10 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<String> updateProduct(Product product) async {
-    final uri = Uri.https( _baseUrl, 'productos/${ product.id }.json');
+    final uri = Uri.https( _baseUrl, 'productos/${ product.id }.json', {
+      'auth': await storage.read(key: 'token') ?? '',
+    });
+
     await http.put( uri, body: product.toJson() );
     
     final index = products.indexWhere((element) => element.id == product.id);
@@ -69,7 +78,10 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<String> createProduct(Product product) async {
-    final uri = Uri.https( _baseUrl, 'productos.json');
+    final uri = Uri.https( _baseUrl, 'productos.json', {
+      'auth': await storage.read(key: 'token') ?? '',
+    });
+
     final resp = await http.post( uri, body: product.toJson() );
     final decodedData = json.decode( resp.body );
 
@@ -84,6 +96,7 @@ class ProductProvider extends ChangeNotifier {
     newPictureFile = File.fromUri( Uri(path: path ) );
     notifyListeners();
   }
+  
   Future<String?> uploadImage() async {
 
     if( newPictureFile == null ) return null;

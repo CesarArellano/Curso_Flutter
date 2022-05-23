@@ -5,25 +5,32 @@ class AppTheme {
   static const primaryColor = Colors.deepPurple;
 
   static final lightTheme = ThemeData.light().copyWith(
+    useMaterial3: true,
+    splashFactory: InkSparkle.splashFactory,
     primaryColor: primaryColor,
     colorScheme: ThemeData().colorScheme.copyWith( // Change color icons TextFormField
       primary: primaryColor,
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      backgroundColor: primaryColor,
+      centerTitle: true
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: primaryColor
     ),
     navigationBarTheme: NavigationBarThemeData(
       indicatorColor: primaryColor.shade100,
+      iconTheme:  MaterialStateProperty.all(const IconThemeData(color: Colors.black)),
       labelTextStyle: MaterialStateProperty.all(
-        const TextStyle( fontSize: 14, fontWeight: FontWeight.w600 )
+        const TextStyle( fontSize: 14, fontWeight: FontWeight.w500 )
       )
     ),
   );
 
   static final darkTheme = ThemeData.dark().copyWith(
+    useMaterial3: true,
+    splashFactory: InkSparkle.splashFactory,
     primaryColor: primaryColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor
@@ -39,9 +46,10 @@ class AppTheme {
       backgroundColor: primaryColor,
     ),
     navigationBarTheme: NavigationBarThemeData(
-      indicatorColor: Colors.deepPurple,
+      indicatorColor: primaryColor.shade400,
+      iconTheme:  MaterialStateProperty.all(const IconThemeData(color: Colors.white)),
       labelTextStyle: MaterialStateProperty.all(
-        const TextStyle( fontSize: 14, fontWeight: FontWeight.w600 )
+        const TextStyle( fontSize: 14, fontWeight: FontWeight.w500 )
       )
     ),
   );

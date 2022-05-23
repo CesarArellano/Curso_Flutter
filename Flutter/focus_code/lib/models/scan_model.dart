@@ -31,7 +31,7 @@ class ScanModel {
 
   void launchUrl(BuildContext context) async {
     if( scanType == 'http' ) {
-      if ( !await launch(scanValue) ) throw 'Could not launch $scanValue';
+      if ( !await canLaunchUrl( Uri.parse(scanValue)) ) throw 'Could not launch $scanValue';
     } else {
       Navigator.pushNamed(context, 'map', arguments: this);
     }

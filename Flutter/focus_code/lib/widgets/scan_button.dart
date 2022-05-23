@@ -19,7 +19,7 @@ class ScanButton extends StatelessWidget {
         if( codeResp == '-1') return;
         
         final newScanModel = await Provider.of<ScanHistoryProvider>(context).newScan(codeResp);    
-        newScanModel.launchUrl(context);
+        newScanModel.launchCodeUrl(context);
       },
     );
   }

@@ -47,7 +47,7 @@ class _MapScreenState extends State<MapScreen> {
             child: IconButton(
               splashRadius: 22,
               tooltip: 'Ubicación actual',
-              icon: const Icon(Icons.location_on),
+              icon: const Icon(Icons.location_on, color: Colors.white),
               onPressed: () async {
                 final GoogleMapController controller = await _mapCompleter.future;
                 controller.animateCamera(CameraUpdate.newCameraPosition(

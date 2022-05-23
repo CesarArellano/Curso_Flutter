@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(
                 tooltip: 'Borrar todo',
                 splashRadius: 22,
-                icon: const Icon( Icons.delete_forever ),
+                icon: const Icon( Icons.delete_forever, color: Colors.white ),
                 onPressed: () {
                   Provider.of<ScanHistoryProvider>(context, listen: false)
                     .deleteAllScans();

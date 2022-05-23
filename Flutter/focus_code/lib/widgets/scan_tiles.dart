@@ -98,7 +98,7 @@ class ScansList extends StatelessWidget {
           title: Text(scans[i].scanValue),
           subtitle: Text(scans[i].id.toString()),
           trailing: const Icon(Icons.keyboard_arrow_right, color: Colors.grey),
-          onTap: () => scans[i].launchUrl(context),
+          onTap: () => scans[i].launchCodeUrl(context),
           onLongPress: () => _showModal( context, scans[i].scanValue )
         ),
       )

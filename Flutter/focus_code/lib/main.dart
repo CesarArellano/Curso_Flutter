@@ -21,7 +21,6 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        
         ChangeNotifierProvider( create: (_) => UiProvider( isDarkmode: UserPreferences.isDarkMode ) ),
         ChangeNotifierProvider( create: ( _ ) => ScanHistoryProvider() ),
       ],

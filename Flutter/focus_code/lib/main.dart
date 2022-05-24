@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/theme/app_theme.dart';
 import 'package:focus_code/user_prefs/user_preferences.dart';
 
 import 'package:provider/provider.dart';
@@ -40,7 +41,9 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRouter.initialRoute,
       routes: AppRouter.routes,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      theme: Provider.of<UiProvider>(context).appThemeData,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: Provider.of<UiProvider>(context).appThemeMode,
     );
   }
 }

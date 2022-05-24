@@ -68,7 +68,7 @@ class ScansList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<UiProvider>(context).appThemeData;
+    final currentTheme = Provider.of<UiProvider>(context).appThemeMode;
 
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -91,7 +91,7 @@ class ScansList extends StatelessWidget {
             scanType == 'http'
               ? Icons.web_sharp
               : Icons.map,
-            color: (currentTheme == AppTheme.lightTheme) 
+            color: (currentTheme == ThemeMode.light) 
               ? AppTheme.primaryColor
               : Colors.white
           ),

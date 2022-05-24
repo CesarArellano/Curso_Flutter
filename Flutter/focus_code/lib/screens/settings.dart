@@ -29,9 +29,9 @@ class Settings extends StatelessWidget {
                     final uiProvider = Provider.of<UiProvider>(context, listen: false);
                     UserPreferences.isDarkMode = ( value == 'dark' );
 
-                    uiProvider.appThemeData = ( value == 'light' ) 
-                      ? AppTheme.lightTheme 
-                      : AppTheme.darkTheme;
+                    uiProvider.appThemeMode = ( value == 'light' ) 
+                      ? ThemeMode.light 
+                      : ThemeMode.dark;
                   }
                 ),
             ],

@@ -8,11 +8,11 @@ class AppTheme {
     useMaterial3: true,
     splashFactory: InkSparkle.splashFactory,
     primaryColor: primaryColor,
-    colorScheme: ThemeData().colorScheme.copyWith( // Change color icons TextFormField
+    colorScheme: const ColorScheme.light().copyWith( // Change color icons TextFormField
       primary: primaryColor,
+      onSurface: Colors.white
     ),
     appBarTheme: const AppBarTheme(
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
       backgroundColor: primaryColor,
       centerTitle: true
     ),
@@ -33,9 +33,10 @@ class AppTheme {
     splashFactory: InkSparkle.splashFactory,
     primaryColor: primaryColor,
     appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor
+      backgroundColor: primaryColor,
+      centerTitle: true
     ),
-    colorScheme: ThemeData.dark().colorScheme.copyWith( // Change color icons TextFormField
+    colorScheme: const ColorScheme.highContrastDark().copyWith( // Change color icons TextFormField
       primary: primaryColor.shade100,
     ),
     inputDecorationTheme: const InputDecorationTheme(

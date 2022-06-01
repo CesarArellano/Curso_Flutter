@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text( appBarTitles[currentIndex] ),
-        centerTitle: true,
         actions: [
           Visibility(
             visible: (currentIndex == 0 || currentIndex == 1) && Provider.of<ScanHistoryProvider>(context).scanHistory.isNotEmpty,
@@ -28,7 +27,7 @@ class HomeScreen extends StatelessWidget {
               child: IconButton(
                 tooltip: 'Borrar todo',
                 splashRadius: 22,
-                icon: const Icon( Icons.delete_forever, color: Colors.white ),
+                icon: const Icon( Icons.delete_forever),
                 onPressed: () {
                   Provider.of<ScanHistoryProvider>(context, listen: false)
                     .deleteAllScans();

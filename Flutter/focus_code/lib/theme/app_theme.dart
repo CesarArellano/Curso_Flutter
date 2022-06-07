@@ -55,6 +55,35 @@ class AppTheme {
     ),
   );
 
+  static final darkAmoledTheme = ThemeData.dark().copyWith(
+    useMaterial3: true,
+    splashFactory: InkSparkle.splashFactory,
+    primaryColor: primaryColor,
+    scaffoldBackgroundColor: Colors.black,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: primaryColor,
+      centerTitle: true
+    ),
+    colorScheme: const ColorScheme.highContrastDark().copyWith( // Change color icons TextFormField
+      primary: primaryColor.shade100,
+    ),
+    inputDecorationTheme: const InputDecorationTheme(
+      prefixIconColor: Colors.white,
+      suffixIconColor: Colors.white
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: primaryColor,
+    ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: Colors.black,
+      indicatorColor: primaryColor.shade400,
+      iconTheme:  MaterialStateProperty.all(const IconThemeData(color: Colors.white)),
+      labelTextStyle: MaterialStateProperty.all(
+        const TextStyle( fontSize: 14, fontWeight: FontWeight.w500 )
+      )
+    ),
+  );
+
   static InputDecoration inputDecoration() {
     return InputDecoration(
       enabledBorder: OutlineInputBorder(

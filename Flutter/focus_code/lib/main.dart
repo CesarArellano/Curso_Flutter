@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:focus_code/theme/app_theme.dart';
 import 'package:focus_code/user_prefs/user_preferences.dart';
 
 import 'package:provider/provider.dart';
@@ -22,7 +21,10 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => UiProvider( isDarkmode: UserPreferences.isDarkMode ) ),
+        ChangeNotifierProvider( create: (_) => UiProvider(
+          isDarkAmoled: UserPreferences.isDarkAmoledMode,
+          isDark: UserPreferences.isDarkMode,
+        )),
         ChangeNotifierProvider( create: ( _ ) => ScanHistoryProvider() ),
       ],
       child: const MyApp(),
@@ -41,9 +43,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRouter.initialRoute,
       routes: AppRouter.routes,
       onGenerateRoute: AppRouter.onGenerateRoute,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: Provider.of<UiProvider>(context).appThemeMode,
+      theme: Provider.of<UiProvider>(context).appTheme,
     );
   }
 }

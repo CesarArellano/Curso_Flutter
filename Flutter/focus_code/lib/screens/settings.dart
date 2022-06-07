@@ -20,18 +20,21 @@ class Settings extends StatelessWidget {
             children: [
               DropdownButtonFormField<String>(
                   decoration: AppTheme.inputDecoration(),
-                  value: UserPreferences.isDarkMode ? 'dark' : 'light',
+                  value: (UserPreferences.isDarkAmoledMode) ? 'darkAmoled' : (UserPreferences.isDarkMode) ? 'dark' : 'light',
                   items: const[
                     DropdownMenuItem( value: 'light', child: Text('Tema Claro')),
                     DropdownMenuItem( value: 'dark', child: Text('Tema Oscuro')),
+                    DropdownMenuItem( value: 'darkAmoled', child: Text('Tema Oscuro (AMOLED)')),
                   ],
                   onChanged: ( value ) {
                     final uiProvider = Provider.of<UiProvider>(context, listen: false);
                     UserPreferences.isDarkMode = ( value == 'dark' );
-
-                    uiProvider.appThemeMode = ( value == 'light' ) 
-                      ? ThemeMode.light 
-                      : ThemeMode.dark;
+                    UserPreferences.isDarkAmoledMode = ( value == 'darkAmoled' );
+                    uiProvider.appTheme = ( value == 'light' ) 
+                      ? AppTheme.lightTheme 
+                      : ( value == 'dark' ) 
+                        ? AppTheme.darkTheme
+                        : AppTheme.darkAmoledTheme;
                   }
                 ),
             ],

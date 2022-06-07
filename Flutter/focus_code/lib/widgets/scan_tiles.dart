@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:focus_code/helpers/helpers.dart';
+import 'package:focus_code/user_prefs/user_preferences.dart';
 
 import 'package:provider/provider.dart';
 import 'package:screenshot/screenshot.dart';
@@ -68,7 +69,7 @@ class ScansList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<UiProvider>(context).appThemeMode;
+    final currentTheme = Provider.of<UiProvider>(context).appTheme;
 
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
@@ -91,7 +92,7 @@ class ScansList extends StatelessWidget {
             scanType == 'http'
               ? Icons.web_sharp
               : Icons.map,
-            color: (currentTheme == ThemeMode.light) 
+            color: (currentTheme == AppTheme.lightTheme) 
               ? AppTheme.primaryColor
               : Colors.white
           ),
@@ -107,10 +108,16 @@ class ScansList extends StatelessWidget {
 
   void _showModal(BuildContext context, String codeValue) {
     showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
+      backgroundColor: UserPreferences.isDarkAmoledMode ? Colors.black : null,
+      shape: RoundedRectangleBorder(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15),
           topRight: Radius.circular(15)
+        ),
+        side: BorderSide(
+          color: Colors.grey.withOpacity(0.75),
+          width: 0.75,
+          style: UserPreferences.isDarkAmoledMode ? BorderStyle.solid : BorderStyle.none
         )
       ),
       context: context,

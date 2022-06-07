@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:focus_code/theme/app_theme.dart';
 
 class UiProvider extends ChangeNotifier {
   
   UiProvider({
-    required bool isDarkmode
-  }): _appThemeMode = isDarkmode ? ThemeMode.dark : ThemeMode.light;
+    required bool isDarkAmoled,
+    required bool isDark,
+  }): _appTheme = isDarkAmoled ? AppTheme.darkAmoledTheme : isDark ? AppTheme.darkTheme : AppTheme.lightTheme;
 
   int _currentIndex = 0;
 
-  ThemeMode _appThemeMode;
+  ThemeData _appTheme;
   
   int get currentIndex => _currentIndex;
 
@@ -17,10 +19,10 @@ class UiProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  ThemeMode get appThemeMode => _appThemeMode;
+  ThemeData get appTheme => _appTheme;
 
-  set appThemeMode( ThemeMode newThemeMode ) {
-    _appThemeMode = newThemeMode;
+  set appTheme( ThemeData newTheme ) {
+    _appTheme = newTheme;
     notifyListeners();
   }
 }

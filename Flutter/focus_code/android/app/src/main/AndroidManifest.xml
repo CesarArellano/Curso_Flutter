@@ -8,7 +8,8 @@
     <application
         android:label="Focus Code"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/launcher_icon"
+        android:usesCleartextTraffic="true">
         <meta-data 
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCefCHBLSaFBVVFmPApJ1FgYf7KrCQxRCw" />

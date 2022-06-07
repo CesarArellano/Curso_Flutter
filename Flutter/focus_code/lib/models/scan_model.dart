@@ -33,7 +33,7 @@ class ScanModel {
     if( scanType == 'http' ) {
       final uri = Uri.parse(scanValue);
       if ( !await canLaunchUrl( uri ) ) throw 'Could not launch $scanValue';
-      launchUrl(uri);
+      launchUrl(uri, mode: LaunchMode.externalApplication);
     } else {
       Navigator.pushNamed(context, 'map', arguments: this);
     }

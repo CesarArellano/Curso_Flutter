@@ -13,7 +13,7 @@ void takeScreenshot(ScreenshotController controller) async {
   File file = File('$tempPath/image.png');
   await file.writeAsBytes(imageFile);
   await Share.shareFiles([file.path], text: "Te comparto el código que generé con Focus Code");
-
+  await file.delete();
 }
 
 void shareContent(String content) async {

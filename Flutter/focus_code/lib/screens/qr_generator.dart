@@ -23,7 +23,7 @@ class _QrGeneratorState extends State<QrGenerator> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
-
+    final size = (deviceWidth > 800) ? deviceWidth * 0.35 : deviceWidth * 0.75; 
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.symmetric( horizontal: 20 ),
@@ -44,8 +44,8 @@ class _QrGeneratorState extends State<QrGenerator> {
               else
                 Image.asset(
                   'assets/images/qr_placeholder.png',
-                  width: deviceWidth * 0.75,
-                  height: deviceWidth * 0.75,
+                  width: size,
+                  height: size,
                 )
             ],
           ),

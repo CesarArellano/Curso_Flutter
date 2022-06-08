@@ -19,7 +19,8 @@ class CustomQRImage extends StatelessWidget {
   Widget build(BuildContext context) {
     
     final deviceWidth = MediaQuery.of(context).size.width;
-
+    final size = (deviceWidth > 600) ? deviceWidth * 0.25 : deviceWidth * 0.65;
+    
     return Screenshot(
       controller: screenshotController,
       child: Container(
@@ -36,7 +37,7 @@ class CustomQRImage extends StatelessWidget {
         ),
         child: QrImage(
           data: qrValue,
-          size: deviceWidth * 0.65,
+          size: size,
         ),
       ),
     );

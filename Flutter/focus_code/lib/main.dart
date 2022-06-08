@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:focus_code/user_prefs/user_preferences.dart';
 
 import 'package:provider/provider.dart';
@@ -11,6 +12,10 @@ import 'package:focus_code/routes/app_router.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserPreferences.init();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp( const AppState() );
 }
 

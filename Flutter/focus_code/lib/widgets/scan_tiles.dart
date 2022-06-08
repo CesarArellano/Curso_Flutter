@@ -43,13 +43,16 @@ class EmptyScans extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = (widthDevice > 800) ? widthDevice * 0.65 : widthDevice * 0.9;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 50),
-          child: SvgPicture.asset('assets/svgs/empty.svg', width: widthDevice * 0.9)
+        Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 50),
+            child: SvgPicture.asset('assets/svgs/empty.svg', width: size)
+          ),
         ),
         const Text('No hay scans disponibles', style: TextStyle(fontSize: 18.0),)
       ],

@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raywayday.focus_code">
+    package="com.cesararellano.focus_code">
     
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- Permissions options for the `camera` group -->

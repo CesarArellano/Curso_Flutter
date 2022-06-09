@@ -8,7 +8,7 @@
 PRODUCT_NAME = focus_code
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.raywayday.focusCode
+PRODUCT_BUNDLE_IDENTIFIER = com.cesararellano.focusCode
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.raywayday. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 com.cesararellano. All rights reserved.

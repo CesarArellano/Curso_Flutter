@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.raywayday" "\0"
+            VALUE "CompanyName", "com.cesararellano" "\0"
             VALUE "FileDescription", "focus_code" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "focus_code" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 com.raywayday. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 com.cesararellano. All rights reserved." "\0"
             VALUE "OriginalFilename", "focus_code.exe" "\0"
             VALUE "ProductName", "focus_code" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

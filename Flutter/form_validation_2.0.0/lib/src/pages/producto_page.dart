@@ -112,7 +112,7 @@ class _ProductoPageState extends State<ProductoPage> {
       height: 40.0,
       child: ElevatedButton.icon(      
         style: ElevatedButton.styleFrom(
-          primary: Colors.deepPurple,
+          backgroundColor: Colors.deepPurple,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0)
           )

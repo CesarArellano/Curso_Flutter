@@ -93,7 +93,7 @@ class PeliculaDetalle extends StatelessWidget {
                     delay: const Duration(milliseconds: 200),
                     child: Text(
                       pelicula.title!,
-                      style: Theme.of(context).textTheme.headline6,
+                      style: Theme.of(context).textTheme.titleLarge,
                       overflow: TextOverflow.ellipsis
                     ),
                   ),
@@ -101,7 +101,7 @@ class PeliculaDetalle extends StatelessWidget {
                     delay: const Duration(milliseconds: 400),
                     child: Text(
                       pelicula.originalTitle!,
-                      style: Theme.of(context).textTheme.subtitle1,
+                      style: Theme.of(context).textTheme.titleMedium,
                       overflow: TextOverflow.ellipsis
                     ),
                   ),
@@ -112,7 +112,7 @@ class PeliculaDetalle extends StatelessWidget {
                         const Icon(Icons.star_border),
                         Text(
                           pelicula.voteAverage.toString(),
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                           overflow: TextOverflow.ellipsis
                         ),
                       ],

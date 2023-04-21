@@ -75,7 +75,7 @@ class ScrollPage extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: 5.0,
-          primary: Colors.blue,
+          backgroundColor: Colors.blue,
           shape: StadiumBorder(),
         ),
         child: Padding(

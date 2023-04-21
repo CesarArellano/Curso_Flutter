@@ -70,8 +70,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Container(
             padding: const EdgeInsets.only(left: 20.0),
-            child:
-                Text("Populares", style: Theme.of(context).textTheme.headline6),
+            child: Text("Populares", style: Theme.of(context).textTheme.titleLarge),
           ),
           const SizedBox( height: 10.0 ),
           StreamBuilder(

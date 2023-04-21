@@ -119,14 +119,14 @@ class _PosterAndTitle extends StatelessWidget {
               children: [
                 Text(
                   movie.title ?? 'No title',
-                  style: textTheme.headline5,
+                  style: textTheme.headlineSmall,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
                 const SizedBox(height: 4),
                 Text(
                   movie.originalTitle,
-                  style: textTheme.subtitle2,
+                  style: textTheme.titleSmall,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
@@ -183,7 +183,7 @@ class _Overview extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             movie.overview,
-            style: textTheme.subtitle1,
+            style: textTheme.titleMedium,
             textAlign: TextAlign.justify,
           ),
         ],
@@ -234,18 +234,18 @@ class _MoreDetails extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('Género(s): ', style: textTheme.subtitle2),
-                  ...movieDetails.genres!.map((genre) => Text('${ genre.name! } ', style: textTheme.subtitle2))
+                  Text('Género(s): ', style: textTheme.titleSmall),
+                  ...movieDetails.genres!.map((genre) => Text('${ genre.name! } ', style: textTheme.titleSmall))
                 ],
               ),
               const SizedBox(height: 5),
-              Text('Fecha de lanzamiento: ${ releaseDate.day }-${ releaseDate.month }-${ releaseDate.year }', style: textTheme.subtitle2),
+              Text('Fecha de lanzamiento: ${ releaseDate.day }-${ releaseDate.month }-${ releaseDate.year }', style: textTheme.titleSmall),
               const SizedBox(height: 5),
-              Text('Duración: ${ durationToString(movieDetails.runtime!) }h', style: textTheme.subtitle2),
+              Text('Duración: ${ durationToString(movieDetails.runtime!) }h', style: textTheme.titleSmall),
               const SizedBox(height: 5),
-              Text('Presupuesto: $budget', style: textTheme.subtitle2),
+              Text('Presupuesto: $budget', style: textTheme.titleSmall),
               const SizedBox(height: 5),
-              Text('Ingresos: $revenue', style: textTheme.subtitle2),
+              Text('Ingresos: $revenue', style: textTheme.titleSmall),
               const SizedBox(height: 10),
               const Text('Actores', style: TextStyle( fontSize: 22, fontWeight: FontWeight.bold)),
               const SizedBox(height: 5),

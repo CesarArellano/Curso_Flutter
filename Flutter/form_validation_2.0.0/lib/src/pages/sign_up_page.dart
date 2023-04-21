@@ -162,9 +162,9 @@ class RegisterPage extends StatelessWidget {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return ElevatedButton(
           style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.grey,
+            backgroundColor: Colors.deepPurple,
             elevation: 0.0,
-            primary: Colors.deepPurple,
-            onPrimary: Colors.grey,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0)
             ),

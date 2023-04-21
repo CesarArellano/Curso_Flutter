@@ -155,7 +155,8 @@ class _ProductForm extends StatelessWidget {
                 validator: ( name ) {
                   if( name == null || name.isEmpty ) {
                     return 'El nombre es requerido';
-                  } 
+                  }
+                  return null; 
                 },
                 cursorColor: Colors.deepPurple,
                 decoration: InputDecorations.authInputDecoration(

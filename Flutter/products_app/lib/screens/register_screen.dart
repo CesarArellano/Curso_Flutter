@@ -28,7 +28,7 @@ class RegisterScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         const SizedBox(height: 10),
-                        Text('Registro', style: Theme.of(context).textTheme.headline4),
+                        Text('Registro', style: Theme.of(context).textTheme.headlineMedium),
                         const SizedBox(height: 15),
                         const _LoginForm()
                       ],
@@ -37,8 +37,7 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   TextButton(
                     style: TextButton.styleFrom(
-                      shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10) ),
-                      primary: Colors.deepPurple
+                      foregroundColor: Colors.deepPurple, shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10) )
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),

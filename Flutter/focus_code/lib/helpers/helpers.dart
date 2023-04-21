@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 void takeScreenshot(ScreenshotController controller) async {
   final imageFile = await controller.capture();
@@ -12,7 +12,7 @@ void takeScreenshot(ScreenshotController controller) async {
   String tempPath = (await getTemporaryDirectory()).path;
   File file = File('$tempPath/image.png');
   await file.writeAsBytes(imageFile);
-  await Share.shareFiles([file.path], text: "Te comparto el código que generé con Focus Code");
+  await Share.shareXFiles([XFile(file.path)], text: "Te comparto el código que generé con Focus Code");
 }
 
 void shareContent(String content) async {

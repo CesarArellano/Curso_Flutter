@@ -127,7 +127,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           image: _buildImage('img2'),
           footer: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.lightBlue,
+              backgroundColor: Colors.lightBlue,
               shape: StadiumBorder()
             ),
             onPressed: () {

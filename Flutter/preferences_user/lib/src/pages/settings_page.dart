@@ -11,10 +11,10 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   final prefs = new UserPreferences();
-  bool _colorSecundario;
-  int _genero;
+  bool? _colorSecundario;
+  int? _genero;
 
-  TextEditingController _inputNameController;
+  TextEditingController? _inputNameController;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           Divider(thickness: 1.0),
           SwitchListTile(
-            value: _colorSecundario,
+            value: _colorSecundario!,
             title: Text("Color secundario"),
             onChanged: (value) {              
               setState(() {
@@ -83,9 +83,9 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _setSelectedRadio(int valor) async {
+  _setSelectedRadio(int? valor) async {
     _genero = valor;
-    prefs.genero = valor;
+    prefs.genero = valor ?? 0;
     setState(() {});
   }
 }

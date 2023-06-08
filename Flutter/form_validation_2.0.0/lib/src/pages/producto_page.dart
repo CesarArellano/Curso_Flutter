@@ -15,19 +15,17 @@ class ProductoPage extends StatefulWidget {
 class _ProductoPageState extends State<ProductoPage> {
   final formKey = GlobalKey<FormState>();
 
-  ProductsBloc productsBloc;
+  late ProductsBloc productsBloc;
   ProductoModel productoModel = new ProductoModel();
   bool _guardando = false;
-  File foto;
+  File? foto;
 
   @override
   Widget build(BuildContext context) {
     productsBloc = Provider.productsBloc(context);
 
-    final ProductoModel prodData = ModalRoute.of(context).settings.arguments;
-    if(prodData != null) {
-      productoModel = prodData;
-    }
+    final ProductoModel prodData = ModalRoute.of(context)?.settings.arguments as ProductoModel;
+    productoModel = prodData;
     return Scaffold(
       appBar: AppBar(
         title: Text('Producto'),
@@ -74,9 +72,9 @@ class _ProductoPageState extends State<ProductoPage> {
       decoration: InputDecoration(
         labelText: 'Producto'
       ),
-      onSaved: (value) => productoModel.titulo = value,
+      onSaved: (value) => productoModel.titulo = value ?? '',
       validator: (value) {
-        return (value.length < 3) ? 'Ingrese el nombre del producto' : null;
+        return ((value ?? '').length < 3) ? 'Ingrese el nombre del producto' : null;
       },
     );
   }
@@ -88,9 +86,9 @@ class _ProductoPageState extends State<ProductoPage> {
       decoration: InputDecoration(
         labelText: 'Precio'
       ),
-      onSaved: (value) => productoModel.valor = double.parse(value),
+      onSaved: (value) => productoModel.valor = double.parse(value!),
       validator: (value) {
-        return (isNumeric(value)) ? null : 'Ingrese el precio del producto';
+        return (isNumeric(value!)) ? null : 'Ingrese el precio del producto';
       },
     );
   }
@@ -125,16 +123,14 @@ class _ProductoPageState extends State<ProductoPage> {
   }
 
   void _submit() async {
-    if( !formKey.currentState.validate() ) return;
-    formKey.currentState.save();
+    if( !formKey.currentState!.validate() ) return;
+    formKey.currentState?.save();
 
     setState(() {
       _guardando = true;
     });
 
-    if(foto != null) {
-      productoModel.fotoUrl = await productsBloc.uploadPhoto(foto);
-    }
+    productoModel.fotoUrl = await productsBloc.uploadPhoto(foto!);
 
     if (productoModel.id == null) {
       productsBloc.addProduct(productoModel);
@@ -160,7 +156,7 @@ class _ProductoPageState extends State<ProductoPage> {
   Widget _mostrarFoto() {
     if (productoModel.fotoUrl != null) {
       return FadeInImage(
-        image: NetworkImage(productoModel.fotoUrl),
+        image: NetworkImage(productoModel.fotoUrl!),
         placeholder: AssetImage('assets/jar-loading.gif'),
         height: 300.0,
         fit: BoxFit.contain,
@@ -168,7 +164,7 @@ class _ProductoPageState extends State<ProductoPage> {
     } else {
       return ( foto != null ) 
       ? Image.file(
-          foto,
+          foto!,
           fit: BoxFit.cover,
           height: 300.0,
         )

@@ -114,7 +114,7 @@ class _InputPageState extends State<InputPage> {
   }
 
   Future _selectDate(BuildContext context) async {
-    DateTime picked = await showDatePicker(
+    DateTime? picked = await showDatePicker(
       context: context,
       initialDate: new DateTime.now(),
       firstDate: new DateTime(2018),
@@ -152,7 +152,7 @@ class _InputPageState extends State<InputPage> {
             items: getOpcionesDropdown(),
             onChanged: (opt) {
               setState(() {
-                _opcionSeleccionada = opt;
+                _opcionSeleccionada = opt ?? '';
               });
             },
           ),

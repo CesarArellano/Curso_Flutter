@@ -126,7 +126,7 @@ class RegisterPage extends StatelessWidget {
               hintText: 'ejemplo@gmail.com',
               labelText: 'Correo electrónico',
               counterText: snapshot.data,
-              errorText: snapshot.error,
+              errorText: snapshot.error.toString(),
             ),
             onChanged: bloc.changeEmail,
           ),
@@ -146,7 +146,7 @@ class RegisterPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
               labelText: 'Contraseña',
-              errorText: snapshot.error,
+              errorText: snapshot.error.toString(),
               counterText: snapshot.data,
             ),
             onChanged: bloc.changePassword,
@@ -180,7 +180,7 @@ class RegisterPage extends StatelessWidget {
   }
 
   _register( BuildContext context, LoginBloc bloc) async {
-    final result = await usuarioProvider.newUser(bloc.email, bloc.password);
+    final result = await usuarioProvider.newUser(bloc.email ?? '', bloc.password ?? '');
     if( result['ok'] ) {
       Navigator.pushNamed(context, 'home');
     } else {

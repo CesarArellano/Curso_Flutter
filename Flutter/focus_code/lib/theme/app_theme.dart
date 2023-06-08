@@ -7,10 +7,14 @@ class AppTheme {
   static final lightTheme = ThemeData.light().copyWith(
     useMaterial3: true,
     splashFactory: InkSparkle.splashFactory,
-    primaryColor: primaryColor,
     colorScheme: const ColorScheme.light().copyWith( // Change color icons TextFormField
       primary: primaryColor,
-      onSurface: Colors.white
+      onSurface: Colors.white,
+    ),
+    iconButtonTheme: const IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor: MaterialStatePropertyAll(Colors.white)
+      )
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,

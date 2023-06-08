@@ -41,8 +41,8 @@ class _HomePageState extends State<HomePage> {
         if (snapshot.hasData) {
           final productos = snapshot.data;
           return ListView.builder(
-            itemCount: productos.length,
-            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos[index], productsBloc),
+            itemCount: productos?.length,
+            itemBuilder: (BuildContext context, int index) => _crearItem(context, productos![index], productsBloc),
           );
         } else {
           return Center(child: CircularProgressIndicator());
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           child: Icon(Icons.delete, color: Colors.white),
         ),
       ),
-      onDismissed: (direction) => productsBloc.deleteProduct(producto.id),
+      onDismissed: (direction) => productsBloc.deleteProduct(producto.id ?? ''),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
         child: Card(
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                 (producto.fotoUrl == null)
                 ? Image(image: AssetImage('assets/no-image.png'))
                 : FadeInImage(
-                  image: NetworkImage(producto.fotoUrl),
+                  image: NetworkImage(producto.fotoUrl ?? ''),
                   placeholder: AssetImage('assets/jar-loading.gif'),
                   height: 300.0,
                   width: double.infinity,

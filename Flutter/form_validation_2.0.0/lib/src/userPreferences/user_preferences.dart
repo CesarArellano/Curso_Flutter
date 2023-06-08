@@ -6,15 +6,16 @@ class UserPreferences {
   factory UserPreferences() {
     return _instancia;
   }
+
   UserPreferences._internal();
-  SharedPreferences _prefs;
+  late SharedPreferences _prefs;
 
   initPrefs() async {
     this._prefs = await SharedPreferences.getInstance();
   }
 
   // GET y SET del token.
-  get token {
+  String get token {
     return _prefs.getString('token') ?? '';
   }
 

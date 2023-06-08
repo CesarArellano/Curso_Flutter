@@ -7,14 +7,14 @@ class UserPreferences {
     return _instancia;
   }
   UserPreferences._internal();
-  SharedPreferences _prefs;
+  late SharedPreferences _prefs;
 
   initPrefs() async {
     this._prefs = await SharedPreferences.getInstance();
   }
 
   // GET y SET del género.
-  get genero {
+  int get genero {
     return _prefs.getInt('genero') ?? 1;
   }
 
@@ -23,7 +23,7 @@ class UserPreferences {
   }
 
   // GET y SET del color secundario.
-  get colorSecundario {
+  bool get colorSecundario {
     return _prefs.getBool('colorSecundario') ?? false;
   }
 
@@ -32,7 +32,7 @@ class UserPreferences {
   }
 
   // GET y SET del nombre.
-  get nombreUsuario {
+  String get nombreUsuario {
     return _prefs.getString('nombreUsuario') ?? '';
   }
 
@@ -41,7 +41,7 @@ class UserPreferences {
   }
 
   // GET y SET del nombre.
-  get ultimaPagina {
+  String get ultimaPagina {
     return _prefs.getString('ultimaPagina') ?? 'home';
   }
 

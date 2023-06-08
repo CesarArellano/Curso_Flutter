@@ -38,11 +38,11 @@ class ProductsBloc {
     _loadController.sink.add(true);
     final photoUrl = await _productsProvider.subirImagen(photo);
     _loadController.sink.add(false);
-    return photoUrl;
+    return photoUrl!;
   }
   
   dispose() {
-    _productsController?.close();
-    _loadController?.close();
+    _productsController.close();
+    _loadController.close();
   }
 }

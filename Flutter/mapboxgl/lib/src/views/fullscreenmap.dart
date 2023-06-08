@@ -13,7 +13,7 @@ class FullScreenMap extends StatefulWidget {
 
 class _FullScreenMapState extends State<FullScreenMap> {
 
-  MapboxMapController mapController;
+  late MapboxMapController mapController;
   final center = LatLng(37.810575, -122.477174);
   String selectedStyle = 'mapbox://styles/klerith/ckcur145v3zxe1io3f7oj00w7';
 
@@ -39,7 +39,7 @@ class _FullScreenMapState extends State<FullScreenMap> {
 
   /// Adds a network image to the currently displayed style
   Future<void> addImageFromUrl(String name, String url) async {
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     return mapController.addImage(name, response.bodyBytes);
   }
 

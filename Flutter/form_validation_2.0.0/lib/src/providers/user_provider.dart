@@ -7,7 +7,7 @@ class UserProvider {
   final _firebaseToken = 'AIzaSyBVe0OMJ_Z6B5yE0mc0RI8SX8oQGWQ049g';
   final prefs = new UserPreferences();
 
-  Future<Map<String, dynamic>> login(String email, String password) async {
+  Future<Map<String, dynamic>> login(String? email, String? password) async {
     final urlApi = Uri.parse('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=$_firebaseToken');
     
     final authData = {

@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 
 // Mandar información o mantener la información global en toda la app.
 
-class LoginBloc with Validators {
+class LoginBloc implements Validators {
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
 
@@ -19,11 +19,17 @@ class LoginBloc with Validators {
   Function(String) get changePassword => _passwordController.sink.add;
 
   //Obtener último valor ingresado.
-  String get email => _emailController.value;
-  String get password => _passwordController.value;
+  String? get email => _emailController.value;
+  String? get password => _passwordController.value;
 
   dispose() {
     _emailController.close();
     _passwordController.close();
   }
+  
+  @override
+  StreamTransformer<String, String> get validarEmail => throw UnimplementedError();
+  
+  @override
+  StreamTransformer<String, String> get validarPassword => throw UnimplementedError();
 }

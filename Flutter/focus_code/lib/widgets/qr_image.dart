@@ -35,7 +35,7 @@ class CustomQRImage extends StatelessWidget {
             )
           ]
         ),
-        child: QrImage(
+        child: QrImageView(
           data: qrValue,
           size: size,
         ),

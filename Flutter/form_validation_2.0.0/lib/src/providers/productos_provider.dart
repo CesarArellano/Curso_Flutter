@@ -22,7 +22,7 @@ class ProductosProvider {
   Future<List<ProductoModel>> cargarProductos() async {
     final url = Uri.parse('$_url/productos.json?auth=${ _prefs.token }');
     final resp = await http.get(url);
-    final Map<String, dynamic> decodedData = json.decode(resp.body);
+    final Map<String, dynamic>? decodedData = json.decode(resp.body);
     final List<ProductoModel> productos = [];
     
     if(decodedData == null) return [];
@@ -52,16 +52,16 @@ class ProductosProvider {
     return true;
   }
 
-  Future<String> subirImagen( File imagen ) async {
+  Future<String?> subirImagen( File imagen ) async {
     final url = Uri.parse('https://api.cloudinary.com/v1_1/dpvsseupu/image/upload?upload_preset=fvps6qmz');
-    final mimeType = mime(imagen.path).split('/'); //image/jpeg
+    final mimeType = mime(imagen.path)?.split('/'); //image/jpeg
 
     final imageUploadRequest = http.MultipartRequest( 'POST', url );
 
     final file = await http.MultipartFile.fromPath(
       'file', 
       imagen.path, 
-      contentType: MediaType(mimeType[0], mimeType[1])
+      contentType: MediaType(mimeType![0], mimeType[1])
     );
     imageUploadRequest.files.add(file);
     final streamedResponse = await imageUploadRequest.send();
